@@ -8,7 +8,7 @@ Disallow: /diretorio-privado/
 
 # Bloqueia o acesso a um arquivo específico
 User-agent: *
-Disallow: /arquivo-privado.html
+Disallow: /src/database/visitantes.db
 
 # Permitindo o acesso a um subdiretório dentro de um diretório bloqueado
 User-agent: *
