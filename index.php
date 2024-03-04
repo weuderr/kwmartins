@@ -92,9 +92,9 @@
 
 <!DOCTYPE html>
 <html lang="pt">
-<?php include('head.php'); ?>
+<?php include('pages/head.php'); ?>
 <body>
-    <?php include('navigator.php'); ?>
+    <?php include('pages/navigator.php'); ?>
 
     <div class="header text-center mb-0">
         <img src="assets/img/BannerKW.png" alt="Banner principal da KW Martins destacando serviços de beleza" class="img-fluid">

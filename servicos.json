@@ -10,7 +10,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 20,83",
-    "Preço": "€35,00"
+    "Preço": "€35,00",
+    "Esprede": "68%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Aplicação em gel",
@@ -23,7 +25,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 18,75",
-    "Preço": "€30,00"
+    "Preço": "€30,00",
+    "Esprede": "60%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Manutenção fibra de vidro (até 4 semanas)",
@@ -36,7 +40,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 18,75",
-    "Preço": "€25,00"
+    "Preço": "€25,00",
+    "Esprede": "33%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Manutenção fibra de vidro (tamanho XL)",
@@ -49,7 +55,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 18,75",
-    "Preço": "€27,00"
+    "Preço": "€27,00",
+    "Esprede": "44%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Manutenção gel (ate 4 semanas)",
@@ -62,7 +70,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 18,75",
-    "Preço": "€23,00"
+    "Preço": "€23,00",
+    "Esprede": "23%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Manutenção gel (tamanho XL)",
@@ -75,7 +85,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 18,75",
-    "Preço": "€25,00"
+    "Preço": "€25,00",
+    "Esprede": "33%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Alongamento em fibra  + Pedicure verniz gel",
@@ -88,7 +100,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 27,08",
-    "Preço": "€ 55,00"
+    "Preço": "€ 55,00",
+    "Esprede": "103%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Alongamento em gel + Pedicure verniz gel",
@@ -101,7 +115,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 25,00",
-    "Preço": "€ 50,00"
+    "Preço": "€ 50,00",
+    "Esprede": "100%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Design com Henna + Extensão Volume Brasileiro",
@@ -114,7 +130,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 18,75",
-    "Preço": "€ 48,00"
+    "Preço": "€ 48,00",
+    "Esprede": "156%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Design com Henna + Extensão Volume russo",
@@ -127,7 +145,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 21,88",
-    "Preço": "€ 55,00"
+    "Preço": "€ 55,00",
+    "Esprede": "151%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Micropigmentação labial",
@@ -140,7 +160,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 12,50",
-    "Preço": "€120,00"
+    "Preço": "€120,00",
+    "Esprede": "860%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Neutralização labial",
@@ -153,7 +175,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 12,50",
-    "Preço": "€120,00"
+    "Preço": "€120,00",
+    "Esprede": "860%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Manicure veniz gel",
@@ -166,7 +190,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 6,25",
-    "Preço": "€15,00"
+    "Preço": "€15,00",
+    "Esprede": "140%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Remoção de verniz gel",
@@ -179,7 +205,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 2,08",
-    "Preço": "€8,00"
+    "Preço": "€8,00",
+    "Esprede": "284%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Pedicure SPA",
@@ -192,7 +220,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 12,50",
-    "Preço": "€45,00"
+    "Preço": "€45,00",
+    "Esprede": "260%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Pedicure verniz gel",
@@ -205,7 +235,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 6,25",
-    "Preço": "€20,00"
+    "Preço": "€20,00",
+    "Esprede": "220%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Remoção de verniz gel",
@@ -218,7 +250,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 2,08",
-    "Preço": "€8,00"
+    "Preço": "€8,00",
+    "Esprede": "284%",
+    "Telefone": "+351966297611"
   },
   {
     "Serviço": "Extensão de pestanas - Efeito delineado",
@@ -231,7 +265,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 12,50",
-    "Preço": "€25,00"
+    "Preço": "€25,00",
+    "Esprede": "100%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Extensão de pestanas - Efeito Kim Kardashian",
@@ -244,7 +280,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 15,63",
-    "Preço": "€35,00"
+    "Preço": "€35,00",
+    "Esprede": "124%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Extensão de pestanas - Efeito molhado",
@@ -257,7 +295,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 12,50",
-    "Preço": "€35,00"
+    "Preço": "€35,00",
+    "Esprede": "180%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Extensão de pestanas - Fio a Fio",
@@ -270,7 +310,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 12,50",
-    "Preço": "€25,00"
+    "Preço": "€25,00",
+    "Esprede": "100%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Extensão de pestanas - Mega Volume",
@@ -283,7 +325,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 15,63",
-    "Preço": "€40,00"
+    "Preço": "€40,00",
+    "Esprede": "156%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Extensão de pestanas - Volume Brasileiro",
@@ -296,7 +340,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 12,50",
-    "Preço": "€28,00"
+    "Preço": "€28,00",
+    "Esprede": "124%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Extensão de pestanas - Volume Russo",
@@ -309,7 +355,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 15,63",
-    "Preço": "€35,00"
+    "Preço": "€35,00",
+    "Esprede": "124%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Lash Lifting",
@@ -322,7 +370,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 6,25",
-    "Preço": "€35,00"
+    "Preço": "€35,00",
+    "Esprede": "460%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Design com Henna personalizado",
@@ -335,7 +385,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 6,25",
-    "Preço": "€20,00"
+    "Preço": "€20,00",
+    "Esprede": "220%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Design de sobrancelhas personalizado",
@@ -348,7 +400,9 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 4,17",
-    "Preço": "€12,00"
+    "Preço": "€12,00",
+    "Esprede": "188%",
+    "Telefone": "+351966296791"
   },
   {
     "Serviço": "Epilação de buço e face",
@@ -361,6 +415,8 @@
     "Nível de Complexidade": 0,
     "Risco de Erros": 0,
     "Valor base": "€ 4,17",
-    "Preço": "€10,00"
+    "Preço": "€10,00",
+    "Esprede": "140%",
+    "Telefone": "+351966296791"
   }
 ]

@@ -26,11 +26,11 @@ $(document).ready(function() {
         });
     }
 
-    function openAppointment(msg) {
+    function openAppointment(msg, phone) {
         // show a confirmation message
         if (confirm('Deseja agendar um horário para ' + msg + '?' + '\n\nClique em OK para abrir o WhatsApp.')) {
             const fullText = 'Gostaria de agendar um horário: ' + msg + '.';
-            window.open('https://api.whatsapp.com/send?phone=351966296791&text=' + encodeURIComponent(fullText));
+            window.open('https://api.whatsapp.com/send?phone='+phone+'&text=' + encodeURIComponent(fullText));
         }
     }
 
@@ -51,7 +51,7 @@ $(document).ready(function() {
                                 <p class="card-text ml-1"><strong>Tempo:</strong> ${servico["Tempo (min)"]} (min)</p>
                                 <p class="card-text ml-1"><strong>Preço:</strong> ${servico.Preço}</p>
                             </div>
-                            <button class="btn btn-custom float-right" onclick="openAppointment('${servico.Serviço}')">Agendar</button>
+                            <button class="btn btn-custom float-right" onclick="openAppointment('${servico.Serviço}','${servico.Telefone}')">Agendar</button>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,14 @@ $(document).ready(function() {
     const sections = ['quem-somos', 'missao', 'servicos', 'galeria', 'depoimentos', 'faq', 'contato'];
     const sectionsinit = ['servicos', 'galeria', 'depoimentos', 'faq', 'contato'];
     function init() {
-        hideItems(sectionsinit);
+        // verificar se a url tem um hash
+        if (window.location.hash) {
+            hideItems(sections);
+            const section = window.location.hash.replace('#', '');
+            selecionarSection(section);
+        } else {
+            hideItems(sectionsinit);
+        }
     }
 
     function hideItems(values) {
@@ -73,20 +80,21 @@ $(document).ready(function() {
         });
     }
 
-    $('.nav-item').click(function() {
-        hideItems(sections);
-        const section = $(this).find('a').attr('href').replace('#', '');
+    function selecionarSection(section) {
         const sectionElement = document.getElementById(section);
-        /*remove active class from all the nav items*/
         $('.nav-item').removeClass('active');
         if (sectionElement) {
             sectionElement.style.display = 'block';
             sectionElement.scrollIntoView({ behavior: 'smooth' });
-            $(this).addClass('active');
+            $(`.nav-item a[href="#${section}"]`).parent().addClass('active');
         }
-    });
+    }
 
-    init();
+    $('.nav-item').click(function() {
+        hideItems(sections);
+        const section = $(this).find('a').attr('href').replace('#', '');
+        selecionarSection(section);
+    });
 
     // if scroller need to down the navigation bar position: fixed; bottom: 0; width: 100%;
     window.onscroll = function() {scrollFunction()};
@@ -107,5 +115,7 @@ $(document).ready(function() {
             }, 100);
         }
     });
+
+    init();
 
 });
