@@ -1,0 +1,156 @@
+.header, .footer { background-color: #000; color: #fff; }
+.navbar-custom { background-color: #000000; }
+.navbar-custom, .navbar-custom a.nav-link { color: #fff; }
+.navbar-custom a:hover, .btn-custom:hover { color: #F13776; }
+.navbar-custom a { color: #fff; }
+.btn-custom { background-color: #F13776; color: #fff; border: none; padding: 10px 20px; }
+.card-custom { flex: 0 0 100%; max-width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+.card-body { height: auto; display: flex; flex-direction: column; justify-content: center; padding: 20px; }
+.gallery-img { padding: 5px; }
+img { width: 100%; height: auto; }
+.testimonial, .faq { background-color: #f8f9fa; padding: 20px; margin-bottom: 20px; border-radius: 5px; }
+.faq-question { font-weight: bold; }
+.active {
+    background-color: #F13776;
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 5px 10px; /* Espaçamento interno */
+}
+
+/* Animações e Efeitos Gerais */
+body {
+    transition: background-color 0.5s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+a:hover {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.btn-custom {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card-custom:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+
+/* Efeito de Sombra nos Cards */
+.card-custom {
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 20px; /* Espaçamento entre os cards */
+    transition: transform 0.3s ease-in-out; /* Transição suave ao passar o mouse */
+}
+
+.card-custom:hover {
+    transform: translateY(-5px); /* Efeito "levantar" ao passar o mouse */
+}
+.card-header {
+    background-color: #F13776; /* Rosa KW - Martins */
+    color: white; /* Texto branco */
+    border-bottom: 1px solid #F13776; /* Para manter consistência caso o card-header tenha borda */
+}
+.card-body {
+    background-color: white; /* Fundo branco */
+    color: black; /* Texto preto */
+}
+.card-title {
+    color: #23272b; /* Preto mais suave para o título, se necessário */
+}
+
+/* Efeito Suave de Rolagem */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Melhorias na Navegação */
+.navbar-custom {
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-custom a.nav-link {
+    transition: color 0.3s ease;
+}
+
+.navbar-custom a.nav-link:hover, .navbar-custom a.nav-link:focus {
+    color: #fff;
+    background-color: transparent;
+    padding-bottom: 3px;
+    border-bottom: 2px solid #fff;
+}
+
+/* Estilos para Botões */
+.btn-custom {
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-custom:hover, .btn-custom:focus {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: scale(1.05);
+}
+
+/* Animação de FadeIn para as Seções */
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0, 40px, 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+.card-custom, .testimonial, .faq {
+    animation: fadeInUp 0.8s ease-out;
+    visibility: visible;
+}
+
+.frame-image {
+    object-fit: cover;
+    margin-bottom: 20px;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.frame-depoimento {
+    object-fit: cover;
+    margin-bottom: 20px;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar{
+    button[aria-expanded="true"] > span.close {
+        display: inline;
+        color: #fff;
+        opacity: 1;
+    }
+
+    button[aria-expanded="true"] > span.navbar-toggler-icon {
+        display: none;
+    }
+
+    button[aria-expanded="false"] > span.close {
+        display: none;
+    }
+}
+
+.navbar-toggler-icon {
+    background-color: #F13776;
+    padding: 5px;
+    border-radius: 5px;
+}
