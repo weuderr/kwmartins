@@ -10,15 +10,15 @@
     $date24 = date('Y-m-d H:i:s', strtotime('-24 hours'));
 
     // Consulta para acessos únicos por usuário (exemplo, agrupando por IP)
-    $acessosUnicosQuery = $database->query("SELECT ip, COUNT(ip) AS acessos FROM access GROUP BY ip");
+    $acessosUnicosQuery = $database->query("SELECT ip, pagina_acessada, COUNT(ip) AS acessos FROM access WHERE resolucao_tela IS NOT 'Desconhecido' GROUP BY ip");
     $acessosUnicos = $acessosUnicosQuery->fetchAll(PDO::FETCH_ASSOC);
 
     // Consulta para acessos totais por usuário (exemplo, agrupando por IP) ultimas 24 horas
-    $acessosTotalQuery = $database->query("SELECT COUNT(ip) AS acessos FROM access WHERE data_hora > '$date24'");
+    $acessosTotalQuery = $database->query("SELECT COUNT(ip) AS acessos FROM access WHERE data_hora > '$date24' AND resolucao_tela IS NOT 'Desconhecido'");
     $acessosTotal = $acessosTotalQuery->fetchAll(PDO::FETCH_ASSOC);
 
     // Consulta para gerar dados para o mapa de calor
-    $dadosMapaCalorQuery = $database->query("SELECT latitude AS lat, longitude AS lng FROM access");
+    $dadosMapaCalorQuery = $database->query("SELECT latitude AS lat, longitude AS lng FROM access WHERE latitude IS NOT 'Desconhecido' AND longitude IS NOT 'Desconhecido' AND resolucao_tela IS NOT 'Desconhecido'");
     $dadosMapaCalor = $dadosMapaCalorQuery->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
@@ -41,46 +41,79 @@
     </style>
 </head>
 <body>
-    <h1>Lista de Visitantes</h1>
+    <div id="dataFrame" style="display: none;">
+        <h1>Lista de Visitantes</h1>
 
-    <!-- Tabela simplificada -->
+        <!-- Tabela simplificada -->
 
-    <p>Total de visitantes únicos: <?php echo count($acessosUnicos); ?></p>
-    <p>Total de visitantes: <?php echo $acessosTotal[0]['acessos']; ?></p>
+        <p>Total de visitantes únicos: <?php echo count($acessosUnicos); ?></p>
+        <p>Total de visitantes: <?php echo $acessosTotal[0]['acessos']; ?></p>
 
-    <div id="map"></div>
+        <div id="map"></div>
+        <div id="lista-visitantes">
+            <h2>Lista de visitantes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>IP</th>
+                        <th>Meio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($acessosUnicos as $acesso): ?>
+                        <tr>
+                            <td><?php echo $acesso['ip']; ?></td>
+                            <td><?php echo $acesso['pagina_acessada']; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
     <script>
-        var dadosMapaCalor = <?php echo json_encode($dadosMapaCalor); ?>;
-
-        // Calcula o centro geométrico
-        var latTotal = 0, lngTotal = 0, count = 0;
-//         dadosMapaCalor.forEach(function(ponto) {
-//             latTotal += parseFloat(ponto.lat);
-//             lngTotal += parseFloat(ponto.lng);
-//             count++;
-//         });
-
-        var centroLat = dadosMapaCalor[0].lat;
-        var centroLng = dadosMapaCalor[0].lng;
-
-//         centroLng = centroLng - 14.0;
-
-        // Ajusta o zoom para um nível apropriado para visualização de cidade
-        var zoomCidade = 13; // Este valor é um bom ponto de partida para áreas urbanas
-
-        var map = L.map('map').setView([centroLat, centroLng], zoomCidade);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; Contribuidores do OpenStreetMap'
-        }).addTo(map);
-
-        var pontosMapaCalor = dadosMapaCalor.map(function(ponto) {
-            return [ponto.lat, ponto.lng];
+//     show dialog with the message and input password to show information key 123
+        function showPasswordDialog(message, callback) {
+            var dialog = document.createElement('div');
+            dialog.className = 'password-dialog';
+            dialog.innerHTML = '<p>' + message + '</p><input type="password" id="password" /><button>OK</button>';
+            document.body.appendChild(dialog);
+            dialog.querySelector('button').addEventListener('click', function() {
+                var password = dialog.querySelector('#password').value;
+                if (password === '154263') {
+                    document.body.removeChild(dialog);
+                    callback(password);
+                    initMap();
+                } else {
+                    alert('Senha incorreta');
+                }
+            });
+        }
+        showPasswordDialog('Digite a senha para ver a localização dos visitantes', function() {
+            document.getElementById('dataFrame').style.display = 'block';
         });
 
-        L.heatLayer(pontosMapaCalor, {radius: 25}).addTo(map);
+        function initMap() {
+            var dadosMapaCalor = <?php echo json_encode($dadosMapaCalor); ?>;
+
+            var centroLat = dadosMapaCalor[0].lat;
+            var centroLng = dadosMapaCalor[0].lng;
+
+            var zoomCidade = 10;
+
+            var map = L.map('map').setView([centroLat, centroLng], zoomCidade);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; Contribuidores do OpenStreetMap'
+            }).addTo(map);
+
+            var pontosMapaCalor = dadosMapaCalor.map(function(ponto) {
+                return [ponto.lat, ponto.lng];
+            });
+
+            L.heatLayer(pontosMapaCalor, {radius: 25}).addTo(map);
+        }
     </script>
 </body>
 </html>

@@ -1,3 +1,13 @@
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1133221804700004');
+// eventos -> https://www.facebook.com/business/help/402791146561655?id=1205376682832142
 $(document).ready(function() {
     let allServicos = []; // Para armazenar todos os serviços
 
@@ -27,13 +37,47 @@ $(document).ready(function() {
     }
 
     function openAppointment(msg, phone) {
-        // show a confirmation message
-        if (confirm('Deseja agendar um horário para ' + msg + '?' + '\n\nClique em OK para abrir o WhatsApp.')) {
-            const fullText = 'Gostaria de agendar um horário: ' + msg + '.';
-            window.open('https://api.whatsapp.com/send?phone='+phone+'&text=' + encodeURIComponent(fullText));
+        fbq('track', 'ViewContent');
+        $('[name="professional-phone"]').val(phone);
+        $('[name="message"]').val(msg);
+
+        $('#appointmentModal').modal('show');
+    }
+
+    function sendAppointment() {
+        const name = $('#name').val();
+        const phone = $('#phone').val();
+        const msg = $('[name="message"]').val();
+        const professionalPhone = $('[name="professional-phone"]').val();
+
+        console.log(name, phone);
+        if (name || phone ) {
+            $.ajax({
+                url: 'save-appointment.php',
+                method: 'POST',
+                data: {
+                    name: name,
+                    phone: phone,
+                    message: msg,
+                    professionalPhone: professionalPhone,
+                    date: new Date().toISOString()
+                },
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+            const fullText = `Olá, meu nome é ${name}. \nEstou entrando em contato para agendar um horário. \nPor favor, poderia me informar os horários disponíveis para ${msg}? Muito obrigado(a) pela atenção.`;
+            window.open('https://api.whatsapp.com/send?phone=' + professionalPhone + '&text=' + encodeURIComponent(fullText));
+            // Ssend fbq track enviar solicitação
+            fbq('track', 'Lead');
+
+            $('#appointmentModal').modal('hide');
+        } else {
+            alert('Preencha todos os campos!');
         }
     }
 
+    window.sendAppointment = sendAppointment;
     window.openAppointment = openAppointment;
 
     function generateCardHTML(servico) {
@@ -51,7 +95,7 @@ $(document).ready(function() {
                                 <p class="card-text ml-1"><strong>Tempo:</strong> ${servico["Tempo (min)"]} (min)</p>
                                 <p class="card-text ml-1"><strong>Preço:</strong> ${servico.Preço}</p>
                             </div>
-                            <button class="btn btn-custom float-right" onclick="openAppointment('${servico.Serviço}','${servico.Telefone}')">Agendar</button>
+                            <button class="btn btn-custom float-right" onclick="openAppointment('${servico.Serviço}', '${servico.Telefone}')">Agendar</button>
                         </div>
                     </div>
                 </div>
@@ -64,7 +108,7 @@ $(document).ready(function() {
         // verificar se a url tem um hash
         if (window.location.hash) {
             hideItems(sections);
-            const section = window.location.hash.replace('#', '');
+            const section = window.location.hash.replace('#', '').replace('/', '');
             selecionarSection(section);
         } else {
             hideItems(sectionsinit);
@@ -92,7 +136,7 @@ $(document).ready(function() {
 
     $('.nav-item').click(function() {
         hideItems(sections);
-        const section = $(this).find('a').attr('href').replace('#', '');
+        const section = $(this).find('a').attr('href').replace('#', '').replace('/', '');
         selecionarSection(section);
     });
 

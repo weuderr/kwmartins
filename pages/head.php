@@ -30,15 +30,33 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="https://kwmartins.pt/assets/img/logo.jpg">
-    <meta name="msapplication-config" content="assets/img/browserconfig.xml">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="KW Martins">
-    <meta name="keywords" content="KW Martins, beleza, estética, tratamentos, bem-estar, sobrancelhas, design de sobrancelhas, micropigmentação, unhas, manicure, pedicure, unhas de gel, estética de sobrancelhas, cuidados com as unhas">
+    <meta name="keywords" content="KW, Martins, KW Martins, beleza, estética, tratamentos, bem-estar, sobrancelhas, design de sobrancelhas, micropigmentação, unhas, manicure, pedicure, unhas de gel, estética de sobrancelhas, cuidados com as unhas">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon-logo-50x50.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://kwmartins.pt/assets/img/icon-logo-50x50.png">
     <title>KW Martins - Sua Beleza, Nossa Paixão</title>
-    <link rel="icon" href="assets/img/icon-logo-50x50.png" type="image/png">
+    <link rel="icon" href="https://kwmartins.pt/assets/img/icon-logo-50x50.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/default.css">
+    <link rel="stylesheet" href="https://kwmartins.pt/assets/css/default.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Meta Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1133221804700004');
+        fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1133221804700004&ev=PageView&noscript=1"
+        /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
