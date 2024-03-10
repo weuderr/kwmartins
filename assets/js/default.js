@@ -102,43 +102,27 @@ $(document).ready(function() {
                `;
     }
 
-    const sections = ['quem-somos', 'missao', 'servicos', 'galeria', 'depoimentos', 'faq', 'contato'];
-    const sectionsinit = ['servicos', 'galeria', 'depoimentos', 'faq', 'contato'];
     function init() {
-        // verificar se a url tem um hash
-        if (window.location.hash) {
-            hideItems(sections);
-            const section = window.location.hash.replace('#', '').replace('/', '');
-            selecionarSection(section);
-        } else {
-            hideItems(sectionsinit);
-        }
+        selecionarSection();
+        generateMetaDescription();
     }
 
-    function hideItems(values) {
-        values.forEach(section => {
-            const sectionElement = document.getElementById(section);
-            if (sectionElement) {
-                sectionElement.style.display = 'none';
-            }
-        });
-    }
 
-    function selecionarSection(section) {
+    function selecionarSection() {
+        const section = window.location.pathname.split('/').pop().split('.').shift();
+        console.log(section);
         const sectionElement = document.getElementById(section);
         $('.nav-item').removeClass('active');
         if (sectionElement) {
             sectionElement.style.display = 'block';
             sectionElement.scrollIntoView({ behavior: 'smooth' });
-            $(`.nav-item a[href="#${section}"]`).parent().addClass('active');
+            $(`#${section}`).parent().addClass('active');
         }
     }
 
-    $('.nav-item').click(function() {
-        hideItems(sections);
-        const section = $(this).find('a').attr('href').replace('#', '').replace('/', '');
-        selecionarSection(section);
-    });
+    // $('.nav-item').click(function() {
+    //     selecionarSection();
+    // });
 
     // if scroller need to down the navigation bar position: fixed; bottom: 0; width: 100%;
     window.onscroll = function() {scrollFunction()};
@@ -162,4 +146,36 @@ $(document).ready(function() {
 
     init();
 
+    function generateMetaDescription() {
+        let containerContent = document.querySelector('.conteudo')?.innerText;
+
+        if (!containerContent || containerContent.trim().length === 0) {
+            return;
+        }
+
+        let trimmedContent = containerContent.trim().replace(/\s+/g, ' '); // Remove espaços em branco extras
+
+        const maxLength = 160;
+        let metaDescription = trimmedContent.substring(0, maxLength);
+
+        const lastSpace = metaDescription.lastIndexOf(' ');
+        if (lastSpace !== -1) {
+            metaDescription = metaDescription.substring(0, lastSpace);
+        }
+
+        if (metaDescription.length < trimmedContent.length) {
+            metaDescription += '...';
+        }
+
+        const metaDescriptionTag = document.querySelector('meta[name="description"]');
+        if (metaDescriptionTag) {
+            metaDescriptionTag.setAttribute('content', metaDescription);
+        } else {
+            const newMetaTag = document.createElement('meta');
+            newMetaTag.setAttribute('name', 'description');
+            newMetaTag.setAttribute('content', metaDescription);
+            document.head.appendChild(newMetaTag);
+        }
+        console.log(metaDescription);
+    }
 });

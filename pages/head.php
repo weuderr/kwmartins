@@ -34,6 +34,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="KW Martins">
     <meta name="keywords" content="KW, Martins, KW Martins, beleza, estética, tratamentos, bem-estar, sobrancelhas, design de sobrancelhas, micropigmentação, unhas, manicure, pedicure, unhas de gel, estética de sobrancelhas, cuidados com as unhas">
+    <meta name="description">
 
     <link rel="apple-touch-icon" sizes="180x180" href="https://kwmartins.pt/assets/img/icon-logo-50x50.png">
     <title>KW Martins - Sua Beleza, Nossa Paixão</title>
@@ -59,4 +60,13 @@
         src="https://www.facebook.com/tr?id=1133221804700004&ev=PageView&noscript=1"
         /></noscript>
     <!-- End Meta Pixel Code -->
+    <!-- clarity Code -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ldzh5ttd0l");
+    </script>
+    <!-- End clarity Code -->
 </head>

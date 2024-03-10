@@ -1,10 +1,11 @@
 <?php
-
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
     // Conecta ao banco de dados
     $database = new PDO('sqlite:/home/u685667027/domains/kwmartins.pt/public_html/visitantes.db');
+
+    $database->exec("CREATE TABLE IF NOT EXISTS access ( id INTEGER PRIMARY KEY AUTOINCREMENT, ip TEXT, latitude TEXT, longitude TEXT, resolucao_tela TEXT, pagina_acessada TEXT, data_hora DATETIME )");
 
     // Consulta para acessos únicos por usuário (exemplo, agrupando por IP) ultimas 24 horas
     $date24 = date('Y-m-d H:i:s', strtotime('-24 hours'));
@@ -21,6 +22,9 @@
     $dadosMapaCalorQuery = $database->query("SELECT latitude AS lat, longitude AS lng FROM access WHERE latitude IS NOT 'Desconhecido' AND longitude IS NOT 'Desconhecido' AND resolucao_tela IS NOT 'Desconhecido'");
     $dadosMapaCalor = $dadosMapaCalorQuery->fetchAll(PDO::FETCH_ASSOC);
 
+    //Select all last tree days of appoimentsSELECT name, phone, professionalPhone, date_time
+    $lastAppointments = $database->query("SELECT name, phone, professionalPhone, date_time FROM appointments WHERE date(date_time) > date('now', '-3 day') ORDER BY date_time DESC");
+    $lastAppointments = $lastAppointments->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +35,7 @@
     <title>Visitantes</title>
     <!-- Inclua os estilos do Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://kwmartins.pt/assets/css/default.css">
     <!-- Estilos adicionais -->
     <style>
         #map {
@@ -38,9 +43,69 @@
             width: 100%;
             margin-top: 20px;
         }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .dialog {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .user-dialog {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .dialog .dialog-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dialog p {
+            margin-top: 0;
+        }
+
+        .dialog input[type="password"] {
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        .dialog input[type="text"] {
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        .dialog button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dialog button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
-<body>
+<body onload="checkUserAuthentication()">
     <div id="dataFrame" style="display: none;">
         <h1>Lista de Visitantes</h1>
 
@@ -49,10 +114,32 @@
         <p>Total de visitantes únicos: <?php echo count($acessosUnicos); ?></p>
         <p>Total de visitantes: <?php echo $acessosTotal[0]['acessos']; ?></p>
 
+        <h2>Últimos 3 dias de marcações</h2>
+        <table class="table" id="appointments" style="padding: 10px;">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Profissional</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($lastAppointments as $appointment): ?>
+                    <tr>
+                        <td><?php echo $appointment['name']; ?></td>
+                        <td><?php echo $appointment['phone']; ?></td>
+                        <td><?php echo $appointment['professionalPhone']; ?></td>
+                        <td><?php echo date('d/m/Y H:i', strtotime($appointment['date_time'])); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
         <div id="map"></div>
         <div id="lista-visitantes">
             <h2>Lista de visitantes</h2>
-            <table>
+            <table class="table" style="padding: 10px;">
                 <thead>
                     <tr>
                         <th>IP</th>
@@ -70,29 +157,104 @@
             </table>
         </div>
     </div>
+
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
     <script>
-//     show dialog with the message and input password to show information key 123
+        var stringMd5 = "b798806fc4767d54dc4e061c79c67999";
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
         function showPasswordDialog(message, callback) {
+            var overlay = document.createElement('div');
+            overlay.className = 'overlay';
+
             var dialog = document.createElement('div');
-            dialog.className = 'password-dialog';
-            dialog.innerHTML = '<p>' + message + '</p><input type="password" id="password" /><button>OK</button>';
-            document.body.appendChild(dialog);
-            dialog.querySelector('button').addEventListener('click', function() {
-                var password = dialog.querySelector('#password').value;
-                if (password === '154263') {
-                    document.body.removeChild(dialog);
-                    callback(password);
-                    initMap();
-                } else {
-                    alert('Senha incorreta');
+            dialog.className = 'dialog';
+
+            dialog.innerHTML = '<div class="dialog-content"><p>' + message + '</p>' +
+                '<input type="text" id="user" placeholder="Usuário" autofocus/>' +
+                '<input type="password" id="password" placeholder="Senha"/>' +
+                '<button id="submitBtn">OK</button>' +
+            '</div>';
+
+            overlay.appendChild(dialog);
+            document.body.appendChild(overlay);
+
+            // Define os manipuladores de eventos após adicionar o HTML ao documento
+            var submitBtn = document.getElementById('submitBtn');
+            var passwordInput = document.getElementById('password');
+            var userInput = document.getElementById('user');
+
+            // Manipulador para o botão
+            submitBtn.addEventListener('click', checkPassword);
+
+            // Permitir pressionar Enter para enviar
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
                 }
             });
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+
+            function dangerDontChange(s) {
+                var parts = ['b', '59'];
+                var replacement = parts.join('');
+                var target = String.fromCharCode(57, 57, 57);
+                return s.replace(target, replacement);
+            }
+
+            function checkPassword() {
+                var user = userInput.value;
+                var password = passwordInput.value;
+                var hash = CryptoJS.MD5(password).toString();
+                if (user === 'admin' && hash === dangerDontChange(this.stringMd5)) {
+                    document.body.removeChild(overlay);
+                    callback();
+                } else {
+                    alert('Usuário ou senha incorretos');
+                }
+            }
         }
-        showPasswordDialog('Digite a senha para ver a localização dos visitantes', function() {
-            document.getElementById('dataFrame').style.display = 'block';
-        });
+
+
+        function checkUserAuthentication() {
+            var userAuthenticated = getCookie('userAuthenticated');
+            if (userAuthenticated === 'true') {
+                document.getElementById('dataFrame').style.display = 'block';
+                initMap();
+            } else {
+                showPasswordDialog('Autenticação necessária', function() {
+                    document.getElementById('dataFrame').style.display = 'block';
+                    initMap();
+                });
+            }
+        }
 
         function initMap() {
             var dadosMapaCalor = <?php echo json_encode($dadosMapaCalor); ?>;

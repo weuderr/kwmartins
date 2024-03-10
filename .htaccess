@@ -15,10 +15,10 @@ RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Reescrever URL para uma aplicação PHP sem mostrar a extensão .php
+# Redirecionar todas as solicitações para o arquivo index.php
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.+)$ $1.php [L,QSA]
+RewriteRule ^(.*)$ index.php [L,QSA]
 
 # Prevenir o acesso direto a arquivos específicos
 <FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">

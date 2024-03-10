@@ -1,6 +1,6 @@
 <nav id="navigation-bar" class="navbar navbar-expand-lg navbar-custom d-flex justify-content-between" style="top: 0; width: 100%; z-index: 100;">
     <div class="d-flex">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img src="https://kwmartins.pt/assets/img/icon-logo-50x50.png" alt="KW Martins" class="d-inline-block align-top" loading="lazy" style="width: 30px; height: 30px;"/>
             Martins
         </a>
@@ -17,14 +17,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="#quem-somos">Quem Somos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#missao">Missao</a></li>
-                <li class="nav-item"><a class="nav-link" href="#servicos">Serviços</a></li>
-                <li class="nav-item"><a class="nav-link" href="#galeria">Galeria</a></li>
-                <li class="nav-item"><a class="nav-link" href="#depoimentos">Depoimentos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
-                <li class="nav-item"><a class="nav-link" href="/pages/artigos/">Artigos</a></li>
+                <li class="nav-item"><a class="nav-link" id="quem-somos" href="/quem-somos">Quem Somos</a></li>
+                <li class="nav-item"><a class="nav-link" id="missao" href="/missao">Missao</a></li>
+                <li class="nav-item"><a class="nav-link" id="servicos" href="/servicos">Serviços</a></li>
+                <li class="nav-item"><a class="nav-link" id="galeria" href="/galeria">Galeria</a></li>
+                <li class="nav-item"><a class="nav-link" id="depoimentos" href="/depoimentos">Depoimentos</a></li>
+                <li class="nav-item"><a class="nav-link" id="pagesartigos" href="/pages/artigos/">Artigos</a></li>
             </ul>
         </div>
     </div>
