@@ -2,7 +2,8 @@
     <div id="menu">
         <h3>Artigos</h3>
         <?php
-            $database = new PDO('sqlite:/home/u685667027/domains/kwmartins.pt/public_html/visitantes.db');
+            require '../../db_connect.php'; // Garante que a conexão com o banco de dados está estabelecida
+
             $result = $database->query("SELECT * FROM articles");
             foreach ($result as $row) {
                 echo "<a href='?id=" . $row['id'] . "'>" . $row['name'] . "</a><br>";
@@ -11,6 +12,7 @@
     </div>
     <div id="article">
         <?php
+            require '../../db_connect.php'; // Garante que a conexão com o banco de dados está estabelecida
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $stmt = $database->prepare("SELECT * FROM articles WHERE id = :id");

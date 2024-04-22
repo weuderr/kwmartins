@@ -37,7 +37,8 @@
     <meta name="description">
 
     <link rel="apple-touch-icon" sizes="180x180" href="https://kwmartins.pt/assets/img/icon-logo-50x50.png">
-    <title>KW Martins - Sua Beleza, Nossa Paixão</title>
+    <title><?php echo isset($pageTitle) ? $pageTitle : 'KW Martins - Sua Beleza, Nossa Paixão'; ?></title>
+<!--    <title>KW Martins - Sua Beleza, Nossa Paixão</title>-->
     <link rel="icon" href="https://kwmartins.pt/assets/img/icon-logo-50x50.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://kwmartins.pt/assets/css/default.css">

@@ -1,30 +1,37 @@
 <?php
+
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
+    session_start();
+    require 'db_connect.php';
 
     // Conecta ao banco de dados
-    $database = new PDO('sqlite:/home/u685667027/domains/kwmartins.pt/public_html/visitantes.db');
+    // O código de conexão está agora no arquivo db_connect.php
 
-    $database->exec("CREATE TABLE IF NOT EXISTS access ( id INTEGER PRIMARY KEY AUTOINCREMENT, ip TEXT, latitude TEXT, longitude TEXT, resolucao_tela TEXT, pagina_acessada TEXT, data_hora DATETIME )");
-
-    // Consulta para acessos únicos por usuário (exemplo, agrupando por IP) ultimas 24 horas
+    // Define o formato de data compatível com MySQL
     $date24 = date('Y-m-d H:i:s', strtotime('-24 hours'));
 
-    // Consulta para acessos únicos por usuário (exemplo, agrupando por IP)
-    $acessosUnicosQuery = $database->query("SELECT ip, pagina_acessada, COUNT(ip) AS acessos FROM access WHERE resolucao_tela IS NOT 'Desconhecido' GROUP BY ip");
+    // Consulta para acessos únicos por usuário (exemplo, agrupando por IP) que não são 'Desconhecido'
+    /** @var TYPE_NAME $database */
+    $acessosUnicosQuery = $database->prepare("SELECT ip, pagina_acessada, COUNT(ip) AS acessos FROM access WHERE resolucao_tela <> 'Desconhecido' GROUP BY ip");
+    $acessosUnicosQuery->execute();
     $acessosUnicos = $acessosUnicosQuery->fetchAll(PDO::FETCH_ASSOC);
 
-    // Consulta para acessos totais por usuário (exemplo, agrupando por IP) ultimas 24 horas
-    $acessosTotalQuery = $database->query("SELECT COUNT(ip) AS acessos FROM access WHERE data_hora > '$date24' AND resolucao_tela IS NOT 'Desconhecido'");
+    // Consulta para acessos totais por usuário (exemplo, agrupando por IP) nas últimas 24 horas
+    $acessosTotalQuery = $database->prepare("SELECT COUNT(ip) AS acessos FROM access WHERE data_hora > ? AND resolucao_tela <> 'Desconhecido'");
+    $acessosTotalQuery->execute([$date24]);
     $acessosTotal = $acessosTotalQuery->fetchAll(PDO::FETCH_ASSOC);
 
     // Consulta para gerar dados para o mapa de calor
-    $dadosMapaCalorQuery = $database->query("SELECT latitude AS lat, longitude AS lng FROM access WHERE latitude IS NOT 'Desconhecido' AND longitude IS NOT 'Desconhecido' AND resolucao_tela IS NOT 'Desconhecido'");
+    $dadosMapaCalorQuery = $database->prepare("SELECT latitude AS lat, longitude AS lng FROM access WHERE latitude <> 'Desconhecido' AND longitude <> 'Desconhecido' AND resolucao_tela <> 'Desconhecido'");
+    $dadosMapaCalorQuery->execute();
     $dadosMapaCalor = $dadosMapaCalorQuery->fetchAll(PDO::FETCH_ASSOC);
 
-    //Select all last tree days of appoimentsSELECT name, phone, professionalPhone, date_time
-    $lastAppointments = $database->query("SELECT name, phone, professionalPhone, date_time FROM appointments WHERE date(date_time) > date('now', '-3 day') ORDER BY date_time DESC");
-    $lastAppointments = $lastAppointments->fetchAll(PDO::FETCH_ASSOC);
+    // Consulta para selecionar os últimos três dias de agendamentos
+    $lastAppointmentsQuery = $database->prepare("SELECT name, phone, professionalPhone, date_time FROM appointments WHERE date_time > DATE_SUB(NOW(), INTERVAL 3 DAY) ORDER BY date_time DESC");
+    $lastAppointmentsQuery->execute();
+    $lastAppointments = $lastAppointmentsQuery->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -161,101 +168,8 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+    <script src="assets/js/auth.js"></script>
     <script>
-        var stringMd5 = "b798806fc4767d54dc4e061c79c67999";
-        function setCookie(cname, cvalue, exdays) {
-            var d = new Date();
-            d.setTime(d.getTime() + (exdays*24*60*60*1000));
-            var expires = "expires="+ d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-        }
-
-        function getCookie(cname) {
-            var name = cname + "=";
-            var decodedCookie = decodeURIComponent(document.cookie);
-            var ca = decodedCookie.split(';');
-            for(var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
-
-        function showPasswordDialog(message, callback) {
-            var overlay = document.createElement('div');
-            overlay.className = 'overlay';
-
-            var dialog = document.createElement('div');
-            dialog.className = 'dialog';
-
-            dialog.innerHTML = '<div class="dialog-content"><p>' + message + '</p>' +
-                '<input type="text" id="user" placeholder="Usuário" autofocus/>' +
-                '<input type="password" id="password" placeholder="Senha"/>' +
-                '<button id="submitBtn">OK</button>' +
-            '</div>';
-
-            overlay.appendChild(dialog);
-            document.body.appendChild(overlay);
-
-            // Define os manipuladores de eventos após adicionar o HTML ao documento
-            var submitBtn = document.getElementById('submitBtn');
-            var passwordInput = document.getElementById('password');
-            var userInput = document.getElementById('user');
-
-            // Manipulador para o botão
-            submitBtn.addEventListener('click', checkPassword);
-
-            // Permitir pressionar Enter para enviar
-            passwordInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    checkPassword();
-                }
-            });
-            userInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    checkPassword();
-                }
-            });
-
-            function dangerDontChange(s) {
-                var parts = ['b', '59'];
-                var replacement = parts.join('');
-                var target = String.fromCharCode(57, 57, 57);
-                return s.replace(target, replacement);
-            }
-
-            function checkPassword() {
-                var user = userInput.value;
-                var password = passwordInput.value;
-                var hash = CryptoJS.MD5(password).toString();
-                if (user === 'admin' && hash === dangerDontChange(this.stringMd5)) {
-                    document.body.removeChild(overlay);
-                    callback();
-                } else {
-                    alert('Usuário ou senha incorretos');
-                }
-            }
-        }
-
-
-        function checkUserAuthentication() {
-            var userAuthenticated = getCookie('userAuthenticated');
-            if (userAuthenticated === 'true') {
-                document.getElementById('dataFrame').style.display = 'block';
-                initMap();
-            } else {
-                showPasswordDialog('Autenticação necessária', function() {
-                    document.getElementById('dataFrame').style.display = 'block';
-                    initMap();
-                });
-            }
-        }
-
         function initMap() {
             var dadosMapaCalor = <?php echo json_encode($dadosMapaCalor); ?>;
 

@@ -2,9 +2,9 @@
 <div class="footer">
     <div class="container" style="padding: 20px;">
       <div>
-        <a href="/politica-de-privacidade" style="color: #333; text-decoration: none;">Política de Privacidade</a>
-        <a href="/termos-de-uso" style="color: #333; text-decoration: none; margin-left: 10px;">Termos de Uso</a>
-        <a href="/faq" style="color: #333; text-decoration: none; margin-left: 10px;">FAQ</a>
+        <a href="../../../public/index.php" style="color: #333; text-decoration: none;">Política de Privacidade</a>
+        <a href="../../../public/index.php" style="color: #333; text-decoration: none; margin-left: 10px;">Termos de Uso</a>
+        <a href="../../../public/index.php" style="color: #333; text-decoration: none; margin-left: 10px;">FAQ</a>
       </div>
     </div>
     <div style="text-align: center; font-size: small;margin-top: 10px; margin-bottom: 5px;">

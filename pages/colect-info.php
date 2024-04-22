@@ -2,29 +2,7 @@
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
-    // Define o caminho do arquivo de banco de dados SQLite
-    $database = new PDO('sqlite:/home/u685667027/domains/kwmartins.pt/public_html/visitantes.db');
-
-    // Cria a tabela se ela não existir
-    $database->exec("CREATE TABLE IF NOT EXISTS access (
-        id INTEGER PRIMARY KEY,
-        ip VARCHAR(100),
-        navegador TEXT,
-        sistema_operacional TEXT,
-        idioma_navegador TEXT,
-        resolucao_tela TEXT,
-        tipo_dispositivo TEXT,
-        data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-        pagina_acessada TEXT,
-        origem_visita TEXT,
-        name_location TEXT,
-        latitude TEXT,
-        longitude TEXT,
-        data_acesso TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-        e_recorrente INTEGER,  -- Usado INTEGER para representar booleano
-        suporte_cookies INTEGER, -- Novo campo para suporte de cookies
-        velocidade_conexao TEXT -- Novo campo para velocidade de conexão
-    )");
+    require __DIR__ .'/../db_connect.php'; // Garante que a conexão com o banco de dados está estabelecida
 
 
     // Captura os dados do visitante
@@ -37,11 +15,11 @@
     $origemVisita = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'Direta';
 
     // Informações de geolocalização
-    $geoJson = file_get_contents("http://www.geoplugin.net/json.gp?ip=$ipVisitante");
-    $geoArray = json_decode($geoJson, true);
-    $location = $geoArray['geoplugin_countryName'] . ', ' . $geoArray['geoplugin_regionName'] . ', ' . $geoArray['geoplugin_city'];
-    $latitude = $geoArray['geoplugin_latitude'];
-    $longitude = $geoArray['geoplugin_longitude'];
+//     $geoJson = file_get_contents("http://www.geoplugin.net/json.gp?ip=$ipVisitante");
+//     $geoArray = json_decode($geoJson, true);
+//     $location = $geoArray['geoplugin_countryName'] . ', ' . $geoArray['geoplugin_regionName'] . ', ' . $geoArray['geoplugin_city'];
+//     $latitude = $geoArray['geoplugin_latitude'];
+//     $longitude = $geoArray['geoplugin_longitude'];
 
     // Informações sobre a campanha
     $utmSource = isset($_GET['utm_source']) ? $_GET['utm_source'] : 'desconhecido';
@@ -87,5 +65,3 @@
 
     $query->execute();
     $id = $database->lastInsertId();
-
-?>

@@ -31,7 +31,7 @@ function loadPageContent($uri) {
             include('pages/sections/politica-de-privacidade.php');
             break;
         case '/termos-de-uso':
-            include('pages/sections/termo-de-uso.php');
+            include('pages/sections/termos-de-uso.php');
             break;
         default:
             include('pages/sections/servicos.php');
@@ -76,8 +76,8 @@ function loadPageContent($uri) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/js/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="assets/js/default.js"></script>
-    <script src="assets/js/update-infos.js"></script>
+    <script src="/assets/js/default.js"></script>
+    <script src="/assets/js/update-infos.js"></script>
     <script>
         document.getElementById('accept-gdpr').addEventListener('click', function() {
             localStorage.setItem('gdpr-consent', 'true');
