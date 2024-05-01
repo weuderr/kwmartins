@@ -3,7 +3,10 @@
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
     session_start();
-    require 'db_connect.php';
+    define('BASE_PATH', realpath(dirname(__FILE__)));
+    require BASE_PATH . '/pages/db_connect.php';
+
+//     $database->exec("CREATE TABLE IF NOT EXISTS access ( id INTEGER PRIMARY KEY AUTOINCREMENT, ip TEXT, latitude TEXT, longitude TEXT, resolucao_tela TEXT, pagina_acessada TEXT, data_hora DATETIME )");
 
     // Conecta ao banco de dados
     // O código de conexão está agora no arquivo db_connect.php
@@ -13,7 +16,7 @@
 
     // Consulta para acessos únicos por usuário (exemplo, agrupando por IP) que não são 'Desconhecido'
     /** @var TYPE_NAME $database */
-    $acessosUnicosQuery = $database->prepare("SELECT ip, pagina_acessada, COUNT(ip) AS acessos FROM access WHERE resolucao_tela <> 'Desconhecido' GROUP BY ip");
+    $acessosUnicosQuery = $database->prepare("SELECT ip, pagina_acessada, data_acesso, COUNT(ip) AS acessos FROM access WHERE resolucao_tela <> 'Desconhecido' GROUP BY ip");
     $acessosUnicosQuery->execute();
     $acessosUnicos = $acessosUnicosQuery->fetchAll(PDO::FETCH_ASSOC);
 
@@ -28,7 +31,7 @@
     $dadosMapaCalor = $dadosMapaCalorQuery->fetchAll(PDO::FETCH_ASSOC);
 
     // Consulta para selecionar os últimos três dias de agendamentos
-    $lastAppointmentsQuery = $database->prepare("SELECT name, phone, professionalPhone, date_time FROM appointments WHERE date_time > DATE_SUB(NOW(), INTERVAL 3 DAY) ORDER BY date_time DESC");
+    $lastAppointmentsQuery = $database->prepare("SELECT name, phone, professionalPhone, date_time FROM appointments WHERE date_time > DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY date_time DESC");
     $lastAppointmentsQuery->execute();
     $lastAppointments = $lastAppointmentsQuery->fetchAll(PDO::FETCH_ASSOC);
 
@@ -146,10 +149,11 @@
         <div id="map"></div>
         <div id="lista-visitantes">
             <h2>Lista de visitantes</h2>
-            <table class="table" style="padding: 10px;">
+            <table class="table" style="padding: 10px; width: 100%">
                 <thead>
                     <tr>
-                        <th>IP</th>
+                        <th style="width: 150px">IP</th>
+                        <th style="width: 150px">Data</th>
                         <th>Meio</th>
                     </tr>
                 </thead>
@@ -157,7 +161,8 @@
                     <?php foreach ($acessosUnicos as $acesso): ?>
                         <tr>
                             <td><?php echo $acesso['ip']; ?></td>
-                            <td><?php echo $acesso['pagina_acessada']; ?></td>
+                            <td><?php echo $acesso['data_acesso']; ?></td>
+                            <td><?php echo $acesso['pagina_acessada'].substr(0, 50); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

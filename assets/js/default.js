@@ -7,22 +7,52 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1133221804700004');
+
+function Sleep(number) {
+    return new Promise(resolve => setTimeout(resolve, number));
+}
+
 // eventos -> https://www.facebook.com/business/help/402791146561655?id=1205376682832142
 $(document).ready(function() {
-    let allServicos = []; // Para armazenar todos os serviços
+    let allServicos = [];
+    let allCategories = [];
+    let appointmentServiceId = null;
 
-    // Carregar serviços e preencher o filtro
-    $.getJSON('servicos.json', function(servicos) {
-        allServicos = servicos; // Armazenar todos os serviços
-        const tipos = new Set(servicos.map(servico => servico.Tipo)); // Extrair tipos únicos
-        tipos.forEach(tipo => $('#serviceTypeFilter').append(`<option value="${tipo}">${tipo}</option>`)); // Preencher filtro
-        updateServiceDisplay(servicos); // Exibir todos os serviços inicialmente
+    $.ajax({
+        url: 'get-category.php',
+        method: 'GET',
+        success: function(response) {
+            if(response.status === 'success') {
+                allCategories = response.categories; // Armazenar todas as categorias
+                allCategories.forEach(category => $('#serviceTypeFilter').append(`<option value="${category.id}">${category.name}</option>`)); // Preencher filtro
+            }
+        },
+        error: function(error) {
+            console.error(error);
+        }
+    });
+
+    $.ajax({
+        url: 'get-services.php',
+        method: 'GET',
+        success: function(response) {
+            if(response.status === 'success') {
+                allServicos = response.services; // Armazenar todos os serviços
+                Sleep(1000).then(r => {
+                    console.log(allServicos);
+                    updateServiceDisplay(allServicos); // Exibir todos os serviços inicialmente
+                });
+            }
+        },
+        error: function(error) {
+            console.error(error);
+        }
     });
 
     // Evento de mudança para o filtro
     $('#serviceTypeFilter').change(function() {
         const selectedType = $(this).val();
-        const filteredServicos = selectedType === 'all' ? allServicos : allServicos.filter(servico => servico.Tipo === selectedType);
+        const filteredServicos = selectedType === 'all' ? allServicos : allServicos.filter(servico => servico.category_id == selectedType);
         updateServiceDisplay(filteredServicos); // Atualizar exibição com serviços filtrados
     });
 
@@ -36,10 +66,11 @@ $(document).ready(function() {
         });
     }
 
-    function openAppointment(msg, phone) {
+    function openAppointment(id, name) {
+        appointmentServiceId = id;
         fbq('track', 'ViewContent');
-        $('[name="professional-phone"]').val(phone);
-        $('[name="message"]').val(msg);
+        $('[name="message"]').val(name);
+        $('#modalAppointmentName').text(name);
 
         $('#appointmentModal').modal('show');
     }
@@ -49,16 +80,17 @@ $(document).ready(function() {
         const phone = $('#phone').val();
         const msg = $('[name="message"]').val();
         const professionalPhone = $('[name="professional-phone"]').val();
-
         console.log(name, phone);
         if (name || phone ) {
+            const fullText = `Olá, meu nome é ${name}. \nEstou entrando em contato para agendar um horário. \nPor favor, poderia me informar os horários disponíveis para ${msg}? Muito obrigado(a) pela atenção.`;
             $.ajax({
                 url: 'save-appointment.php',
                 method: 'POST',
                 data: {
                     name: name,
                     phone: phone,
-                    message: msg,
+                    message: fullText,
+                    service_id: appointmentServiceId,
                     professionalPhone: professionalPhone,
                     date: new Date().toISOString()
                 },
@@ -66,7 +98,6 @@ $(document).ready(function() {
                     console.log(response);
                 }
             });
-            const fullText = `Olá, meu nome é ${name}. \nEstou entrando em contato para agendar um horário. \nPor favor, poderia me informar os horários disponíveis para ${msg}? Muito obrigado(a) pela atenção.`;
             window.open('https://api.whatsapp.com/send?phone=' + professionalPhone + '&text=' + encodeURIComponent(fullText));
             // Ssend fbq track enviar solicitação
             fbq('track', 'Lead');
@@ -81,21 +112,17 @@ $(document).ready(function() {
     window.openAppointment = openAppointment;
 
     function generateCardHTML(servico) {
+        const type = allCategories.filter(category => category.id === servico.category_id);
         return `
                 <div class="col-md-4">
                     <div class="card shadow-sm card-custom">
-                        <div class="card-header">${servico.Serviço}</div>
+                        <div class="card-header">${servico.name}</div>
                         <div class="card-body">
-                            <h5 class="card-title">${servico.Tipo}</h5>
-                            <p class="card-text">${servico.Descrição}</p>
-                            <p class="card-text"><strong>Detalhes:</strong> ${servico.Detalhes}</p>
+                            <h5 class="card-title">${type[0].name}</h5>
+                            <p class="card-text">${servico.description}</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <div class="d-block">
-                                <p class="card-text ml-1"><strong>Tempo:</strong> ${servico["Tempo (min)"]} (min)</p>
-                                <p class="card-text ml-1"><strong>Preço:</strong> ${servico.Preço}</p>
-                            </div>
-                            <button class="btn btn-custom float-right" onclick="openAppointment('${servico.Serviço}', '${servico.Telefone}')">Agendar</button>
+                            <button class="btn btn-custom float-right" onclick="openAppointment('${servico.id}', '${servico.name}')">Agendar</button>
                         </div>
                     </div>
                 </div>

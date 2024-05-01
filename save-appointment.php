@@ -1,33 +1,55 @@
 <?php
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
-    // Verifica se a requisição é do tipo POST
+
+    header('Content-Type: application/json');
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Define o caminho do arquivo de banco de dados SQLite
-        $database = new PDO('sqlite:/home/u685667027/domains/kwmartins.pt/public_html/visitantes.db');
+        define('BASE_PATH', realpath(dirname(__FILE__)));
+        require BASE_PATH . '/pages/db_connect.php';
 
-        $database->exec('CREATE TABLE IF NOT EXISTS appointments (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, phone TEXT, message TEXT, professionalPhone TEXT, date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)');
+        $name = $_POST['name'] ?? '';
+        $phone = $_POST['phone'] ?? '';
+        $message = $_POST['message'] ?? '';
+        $serviceId = $_POST['service_id'] ?? null;
+        $date = $_POST['date'] ?? '';
 
-        // Prepara os dados recebidos do AJAX
-        $name = $_POST['name'];
-        $phone = $_POST['phone'];
-        $message = $_POST['message'];
-        $professionalPhone = $_POST['professionalPhone'];
-        $data = $_POST['date'];
+        // Verificar se o cliente já existe
+        $checkClient = $database->prepare("SELECT id FROM clients WHERE phone = :phone LIMIT 1");
+        $checkClient->bindParam(':phone', $phone);
+        $checkClient->execute();
+        $existingClient = $checkClient->fetch(PDO::FETCH_ASSOC);
 
-        // Prepara a query de inserção
-        $query = $database->prepare('INSERT INTO appointments (name, phone, message, professionalPhone, date_time) VALUES (:name, :phone, :message, :professionalPhone, :date_time)');
-        $query->bindParam(':name', $name);
-        $query->bindParam(':phone', $phone);
-        $query->bindParam(':message', $message);
-        $query->bindParam(':professionalPhone', $professionalPhone);
-        $query->bindParam(':date_time', $data);
+        if ($existingClient) {
+            $client_id = $existingClient['id'];
+        } else {
+            // Inserir o novo cliente se ele não existir
+            $queryClient = $database->prepare('INSERT INTO clients (name, phone, created_at) VALUES (:name, :phone, :created_at) RETURNING id');
+            $queryClient->bindParam(':name', $name);
+            $queryClient->bindParam(':phone', $phone);
+            $queryClient->bindParam(':created_at', date('Y-m-d H:i:s'));
+            $queryClient->execute();
+            $client_id = $queryClient->fetchColumn();
+        }
 
-        // Executa a query
-        $query->execute();
+        // Inserir o agendamento
+        $queryAppointment = $database->prepare('INSERT INTO appointments (notes, client_id, created_at) VALUES (:notes, :client_id, :created_at) RETURNING id');
+        $queryAppointment->bindParam(':notes', $message);
+        $queryAppointment->bindParam(':client_id', $client_id);
+        $queryAppointment->bindParam(':created_at', date('Y-m-d H:i:s'));
+        $queryAppointment->execute();
+        $appointment_id = $queryAppointment->fetchColumn();
 
-        // Retorna a resposta para o AJAX
+        // Inserir o serviço do agendamento
+        $queryService = $database->prepare('INSERT INTO appointment_services (service_id, appointment_id, appointment_date, created_at) VALUES (:service_id, :appointment_id, :appointment_date, :created_at)');
+        $queryService->bindParam(':service_id', $serviceId);
+        $queryService->bindParam(':appointment_id', $appointment_id);
+        $queryService->bindParam(':appointment_date', $date);
+        $queryService->bindParam(':created_at', date('Y-m-d H:i:s'));
+        $queryService->execute();
+
         echo json_encode(array('status' => 'success', 'message' => 'Appointment saved successfully!'));
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => 'Invalid request method.'));
     }
-
 ?>

@@ -2,7 +2,7 @@
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
-    require __DIR__ .'/../db_connect.php'; // Garante que a conexão com o banco de dados está estabelecida
+    require BASE_PATH  .'/pages/db_connect.php'; // Garante que a conexão com o banco de dados está estabelecida
 
 
     // Captura os dados do visitante

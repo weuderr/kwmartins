@@ -1,4 +1,7 @@
 <?php
+// Define a constante BASE_PATH
+define('BASE_PATH', realpath(dirname(__FILE__)));
+
 $currentPage = basename($_SERVER['PHP_SELF']);
 include('pages/colect-info.php');
 
