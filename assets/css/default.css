@@ -178,16 +178,6 @@ a {
     width: 100%;
 }
 
-#blog {
-    display: flex;
-    padding: 20px;
-}
-
-#menu {
-    width: 200px;
-    border-right: 1px solid #ccc;
-    padding: 10px;
-}
 #article {
     padding: 10px;
 }
@@ -228,7 +218,6 @@ a {
     transition: background-color 0.3s ease; /* Transição suave para o efeito de brilho */
 }
 
-
 .gdpr-consent-container {
     position: fixed;
     left: 0;
@@ -264,4 +253,145 @@ a {
 
 #accept-gdpr:hover {
     background-color: #006600;
+}
+
+
+/* Layout base do contêiner do blog */
+#blog {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+/* Botão para toggle do menu */
+#menu-toggle {
+    display: none; /* Inicialmente escondido em desktops */
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* Estilização do menu de artigos */
+#menu {
+    width: 240px; /* Largura fixa para o menu */
+    background: #f4f4f4; /* Cor de fundo para o menu */
+    padding: 20px;
+    box-sizing: border-box; /* Garante que o padding não adicione largura ao elemento */
+    height: 100vh; /* Altura total da janela de visualização */
+    overflow-y: auto; /* Adiciona rolagem se o conteúdo for muito longo */
+}
+
+/* Home */
+
+.service-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e2e2e2
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.4) 0%, rgba(255, 255, 255, 0) 55%);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.service-card:hover::before {
+    top: 150%;
+    left: 150%;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.service-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.service-card footer {
+    margin-top: 15px;
+    text-align: center;
+    font-style: italic;
+    color: #999;
+}
+
+/* Links do menu */
+.menu-link {
+    display: block;
+    margin: 10px 0;
+    color: #0077cc;
+    text-decoration: none;
+}
+
+.menu-link:hover {
+    text-decoration: underline;
+}
+
+
+/* Área principal para exibir o artigo */
+#article {
+    flex-grow: 1; /* Faz com que o artigo preencha o espaço restante */
+    padding: 20px;
+    overflow-y: auto; /* Adiciona rolagem se o conteúdo for muito longo */
+}
+
+/* Estilo específico para a mensagem de boas-vindas */
+#welcome {
+    padding: 20px;
+    background-color: #e8e8e8;
+    border-radius: 10px;
+}
+
+/* Media Queries para responsividade */
+/* Media Queries */
+@media (max-width: 768px) {
+    #menu-toggle {
+        display: block; /* Mostra o botão em telas pequenas */
+        position: absolute; /* Posiciona sobre o layout */
+        top: 50px;
+        left: 10px;
+        z-index: 1000; /* Garante que fique sobre outros elementos */
+    }
+
+    #menu {
+        width: 100%; /* Toma a largura total em mobile */
+        position: fixed; /* Fica fixo enquanto a tela rola */
+        top: 0;
+        left: 0;
+        transform: translateX(-100%); /* Começa fora da tela */
+        height: 100%; /* Altura total */
+    }
+
+    #menu.open {
+        transform: translateX(0); /* Move para a tela quando aberto */
+    }
+
+    #article {
+        padding: 15px;
+        margin-top: 50px; /* Espaço para o botão do menu */
+    }
 }

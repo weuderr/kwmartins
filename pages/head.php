@@ -5,18 +5,18 @@
     <meta property="og:title" content="KW Martins - Sua Beleza, Nossa Paixão" />
     <meta property="og:description" content="Descubra como a KW Martins pode transformar sua beleza e autoestima com nossos serviços especializados." />
     <meta property="og:url" content="https://www.kwmartins.pt" />
-    <meta property="og:image" itemprop="image" content="https://kwmartins.pt/assets/img/logo.jpg" />
+    <meta property="og:image" itemprop="image" content="https://kwmartins.pt/assets/img/icon-logo.png" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="KW Martins" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:locale:alternate" content="es_ES" />
-    <meta name="twitter:card" content="https://kwmartins.pt/assets/img/logo.jpg">
+    <meta name="twitter:card" content="https://kwmartins.pt/assets/img/icon-logo.png">
     <meta name="twitter:site" content="@KWBeauty">
     <meta name="twitter:creator" content="@KWBeauty">
     <meta name="twitter:title" content="KW Martins - Sua Beleza, Nossa Paixão">
     <meta name="twitter:description" content="Descubra como a KW Martins pode transformar sua beleza e autoestima com nossos serviços especializados.">
-    <meta name="twitter:image" content="https://kwmartins.pt/assets/img/logo.jpg">
+    <meta name="twitter:image" content="https://kwmartins.pt/assets/img/icon-logo.png">
     <meta name="description" content="Descubra como a KW Martins pode transformar sua beleza e autoestima com nossos serviços especializados.">
     <meta name="keywords" content="KW Martins, beleza, estética, tratamentos, depilação, massagens, bem-estar">
     <meta name="author" content="KW Martins">
@@ -29,7 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="https://kwmartins.pt/assets/img/logo.jpg">
+    <meta name="msapplication-TileImage" content="https://kwmartins.pt/assets/img/icon-logo.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="KW Martins">
@@ -40,12 +40,13 @@
     <title><?php echo isset($pageTitle) ? $pageTitle : 'KW Martins - Sua Beleza, Nossa Paixão'; ?></title>
 <!--    <title>KW Martins - Sua Beleza, Nossa Paixão</title>-->
     <link rel="icon" href="https://kwmartins.pt/assets/img/icon-logo-50x50.png" type="image/png">
+    <link rel="stylesheet" href="https://kwmartins.pt/assets/css/reset.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://kwmartins.pt/assets/css/default.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Meta Pixel Code -->
-        <script>
+    <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -56,10 +57,10 @@
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '1133221804700004');
         fbq('track', 'PageView');
-        </script>
-        <noscript><img height="1" width="1" style="display:none"
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=1133221804700004&ev=PageView&noscript=1"
-        /></noscript>
+    /></noscript>
     <!-- End Meta Pixel Code -->
     <!-- clarity Code -->
     <script type="text/javascript">
@@ -70,4 +71,13 @@
         })(window, document, "clarity", "script", "ldzh5ttd0l");
     </script>
     <!-- End clarity Code -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16557132820"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-16557132820');
+    </script>
 </head>

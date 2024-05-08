@@ -14,9 +14,9 @@
     // Define o formato de data compatível com MySQL
     $date24 = date('Y-m-d H:i:s', strtotime('-24 hours'));
 
-    // Consulta para acessos únicos por usuário (exemplo, agrupando por IP) que não são 'Desconhecido'
+    // Consulta para acessos únicos por usuário (exemplo, agrupando por IP) que não são 'Desconhecido' ORDER BY created_at
     /** @var TYPE_NAME $database */
-    $acessosUnicosQuery = $database->prepare("SELECT ip, pagina_acessada, data_acesso, COUNT(ip) AS acessos FROM access WHERE resolucao_tela <> 'Desconhecido' GROUP BY ip");
+    $acessosUnicosQuery = $database->prepare("SELECT ip, pagina_acessada, data_acesso, COUNT(ip) AS acessos FROM access WHERE resolucao_tela <> 'Desconhecido' GROUP BY ip ORDER BY data_acesso DESC");
     $acessosUnicosQuery->execute();
     $acessosUnicos = $acessosUnicosQuery->fetchAll(PDO::FETCH_ASSOC);
 
@@ -31,7 +31,7 @@
     $dadosMapaCalor = $dadosMapaCalorQuery->fetchAll(PDO::FETCH_ASSOC);
 
     // Consulta para selecionar os últimos três dias de agendamentos
-    $lastAppointmentsQuery = $database->prepare("SELECT name, phone, professionalPhone, date_time FROM appointments WHERE date_time > DATE_SUB(NOW(), INTERVAL 30 DAY) ORDER BY date_time DESC");
+    $lastAppointmentsQuery = $database->prepare("SELECT client_id, notes, created_at FROM appointments WHERE created_at > DATE_SUB(NOW(), INTERVAL 30 DAY) AND deleted_at IS NULL ORDER BY created_at");
     $lastAppointmentsQuery->execute();
     $lastAppointments = $lastAppointmentsQuery->fetchAll(PDO::FETCH_ASSOC);
 
@@ -113,6 +113,12 @@
         .dialog button:hover {
             background-color: #0056b3;
         }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+            width: 100%;
+        }
+
     </style>
 </head>
 <body onload="checkUserAuthentication()">
@@ -128,19 +134,17 @@
         <table class="table" id="appointments" style="padding: 10px;">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Telefone</th>
-                    <th>Profissional</th>
+                    <th>Client id</th>
+                    <th>Nota</th>
                     <th>Data</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($lastAppointments as $appointment): ?>
                     <tr>
-                        <td><?php echo $appointment['name']; ?></td>
-                        <td><?php echo $appointment['phone']; ?></td>
-                        <td><?php echo $appointment['professionalPhone']; ?></td>
-                        <td><?php echo date('d/m/Y H:i', strtotime($appointment['date_time'])); ?></td>
+                        <td><?php echo $appointment['client_id']; ?></td>
+                        <td><?php echo $appointment['notes']; ?></td>
+                        <td><?php echo date('d/m/Y H:i', strtotime($appointment['created_at'])); ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -162,7 +166,7 @@
                         <tr>
                             <td><?php echo $acesso['ip']; ?></td>
                             <td><?php echo $acesso['data_acesso']; ?></td>
-                            <td><?php echo $acesso['pagina_acessada'].substr(0, 50); ?></td>
+                            <td><?php echo substr($acesso['pagina_acessada'], 0, 50); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

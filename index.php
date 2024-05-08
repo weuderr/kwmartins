@@ -8,7 +8,11 @@ include('pages/colect-info.php');
 $requestedUri = $_SERVER['REQUEST_URI'];
 
 function loadPageContent($uri) {
+    $uri = explode('?', $uri)[0];
     switch ($uri) {
+        case '/home':
+            include('pages/sections/home.php');
+            break;
         case '/quem-somos':
             include('pages/sections/quem-somos.php');
             break;
@@ -37,7 +41,7 @@ function loadPageContent($uri) {
             include('pages/sections/termos-de-uso.php');
             break;
         default:
-            include('pages/sections/servicos.php');
+            include('pages/sections/home.php');
             break;
     }
 }
@@ -73,6 +77,7 @@ function loadPageContent($uri) {
             <button id="accept-gdpr">Aceitar</button>
         </div>
     </div>
+
     <div id="hiddenData" data-id="<?php echo $id; ?>"></div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

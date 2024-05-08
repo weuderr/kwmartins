@@ -1,18 +1,27 @@
+
 <div id="blog">
+    <button id="menu-toggle" aria-label="Toggle menu">☰</button> <!-- Ícone do menu -->
     <div id="menu">
         <h3>Artigos</h3>
         <?php
-            require BASE_PATH  . '/pages/db_connect.php'; // Garante que a conexão com o banco de dados está estabelecida
+            ini_set('display_errors', 1);
+            error_reporting(E_ALL);
+
+            define('BASE_PATH_PAGES', dirname(dirname(__FILE__)));
+            require BASE_PATH_PAGES  . '/db_connect.php';
 
             $result = $database->query("SELECT * FROM articles");
+
             foreach ($result as $row) {
-                echo "<a href='?id=" . $row['id'] . "'>" . $row['name'] . "</a><br>";
+                echo "<a class='menu-link' href='?id=" . $row['id'] . "'>" . $row['name'] . "</a><br>";
             }
         ?>
     </div>
     <div id="article">
         <?php
-            require BASE_PATH  . '/pages/db_connect.php'; // Garante que a conexão com o banco de dados está estabelecida
+            ini_set('display_errors', 1);
+            error_reporting(E_ALL);
+
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $stmt = $database->prepare("SELECT * FROM articles WHERE id = :id");

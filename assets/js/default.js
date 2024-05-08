@@ -16,21 +16,29 @@ function Sleep(number) {
 $(document).ready(function() {
     let allServicos = [];
     let allCategories = [];
-    let appointmentServiceId = null;
+    let selectedService = {};
 
-    $.ajax({
-        url: 'get-category.php',
-        method: 'GET',
-        success: function(response) {
-            if(response.status === 'success') {
-                allCategories = response.categories; // Armazenar todas as categorias
-                allCategories.forEach(category => $('#serviceTypeFilter').append(`<option value="${category.id}">${category.name}</option>`)); // Preencher filtro
+
+    function obterCategorias() {
+
+        $.ajax({
+            url: 'get-category.php',
+            method: 'GET',
+            success: function(response) {
+                if(response.status === 'success') {
+                    allCategories = response.categories; // Armazenar todas as categorias
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const serviceStorage = urlParams.get('service');
+                    allCategories.forEach(category => $('#serviceTypeFilter').append(`<option value="${category.id}" ${serviceStorage == category.name ? 'selected' : ''}>${category.name}</option>`));
+                    updateServiceDisplay(allServicos);
+                    filtraServicoSelecionado();
+                }
+            },
+            error: function(error) {
+                console.error(error);
             }
-        },
-        error: function(error) {
-            console.error(error);
-        }
-    });
+        });
+    }
 
     $.ajax({
         url: 'get-services.php',
@@ -38,10 +46,7 @@ $(document).ready(function() {
         success: function(response) {
             if(response.status === 'success') {
                 allServicos = response.services; // Armazenar todos os serviços
-                Sleep(1000).then(r => {
-                    console.log(allServicos);
-                    updateServiceDisplay(allServicos); // Exibir todos os serviços inicialmente
-                });
+                obterCategorias();
             }
         },
         error: function(error) {
@@ -51,10 +56,14 @@ $(document).ready(function() {
 
     // Evento de mudança para o filtro
     $('#serviceTypeFilter').change(function() {
-        const selectedType = $(this).val();
-        const filteredServicos = selectedType === 'all' ? allServicos : allServicos.filter(servico => servico.category_id == selectedType);
-        updateServiceDisplay(filteredServicos); // Atualizar exibição com serviços filtrados
+        filtraServicoSelecionado();
     });
+
+    function filtraServicoSelecionado() {
+        const selectedType = $('#serviceTypeFilter').val();
+        const filteredServicos = selectedType === 'all' ? allServicos : allServicos.filter(servico => servico.category_id == selectedType);
+        updateServiceDisplay(filteredServicos);
+    }
 
     // Função para atualizar a exibição dos serviços
     function updateServiceDisplay(servicos) {
@@ -67,12 +76,18 @@ $(document).ready(function() {
     }
 
     function openAppointment(id, name) {
-        appointmentServiceId = id;
         fbq('track', 'ViewContent');
         $('[name="message"]').val(name);
         $('#modalAppointmentName').text(name);
-
         $('#appointmentModal').modal('show');
+        const service = allServicos.filter(servico => servico.id == id);
+        selectedService = service[0];
+
+        gtag('event', 'interest', {
+            'event_category': 'appointment',
+            'event_label': 'open',
+            'value': selectedService?.price,
+        });
     }
 
     function sendAppointment() {
@@ -80,27 +95,37 @@ $(document).ready(function() {
         const phone = $('#phone').val();
         const msg = $('[name="message"]').val();
         const professionalPhone = $('[name="professional-phone"]').val();
-        console.log(name, phone);
+        fbq('track', 'Lead');
+
         if (name || phone ) {
             const fullText = `Olá, meu nome é ${name}. \nEstou entrando em contato para agendar um horário. \nPor favor, poderia me informar os horários disponíveis para ${msg}? Muito obrigado(a) pela atenção.`;
+            const dataSend = {
+                name: name,
+                phone: phone,
+                message: fullText,
+                service_id: selectedService?.id,
+                professionalPhone: professionalPhone,
+                date: new Date().toISOString()
+            };
+
             $.ajax({
                 url: 'save-appointment.php',
                 method: 'POST',
-                data: {
-                    name: name,
-                    phone: phone,
-                    message: fullText,
-                    service_id: appointmentServiceId,
-                    professionalPhone: professionalPhone,
-                    date: new Date().toISOString()
-                },
+                data: dataSend,
                 success: function(response) {
                     console.log(response);
                 }
             });
+
             window.open('https://api.whatsapp.com/send?phone=' + professionalPhone + '&text=' + encodeURIComponent(fullText));
             // Ssend fbq track enviar solicitação
-            fbq('track', 'Lead');
+
+            <!-- Event snippet for Visualização de página conversion page -->
+            gtag('event', 'conversion', {
+                'send_to': 'AW-16557132820/UO70CNKcxq0ZEJSYh9c9',
+                'value': selectedService?.price,
+                'currency': 'EUR'
+            });
 
             $('#appointmentModal').modal('hide');
         } else {
@@ -112,7 +137,7 @@ $(document).ready(function() {
     window.openAppointment = openAppointment;
 
     function generateCardHTML(servico) {
-        const type = allCategories.filter(category => category.id === servico.category_id);
+        const type = allCategories.filter(category => category.id == servico.category_id);
         return `
                 <div class="col-md-4">
                     <div class="card shadow-sm card-custom">

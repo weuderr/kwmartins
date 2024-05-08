@@ -1,8 +1,11 @@
 <?php
-require BASE_PATH . '/vendor/autoload.php';
+if (!defined('BASE_PATH_ROOT')) {
+    define('BASE_PATH_ROOT', realpath(dirname(dirname(__FILE__))));
+}
+require BASE_PATH_ROOT . '/vendor/autoload.php';
 
 // Carrega as variáveis de ambiente
-$dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
+$dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH_ROOT);
 $dotenv->load();
 
 // Configurações de conexão com o banco de dados MySQL

@@ -1,20 +1,7 @@
 # Permite que todos os crawlers acessem tudo
 User-agent: *
-Disallow:
+Disallow: /
 
 # Bloqueia o acesso a um diretório específico
 User-agent: *
-Disallow: /diretorio-privado/
-
-# Bloqueia o acesso a um arquivo específico
-User-agent: *
-Disallow: /src/database/visitantes.db
-
-# Permitindo o acesso a um subdiretório dentro de um diretório bloqueado
-User-agent: *
-Disallow: /diretorio-privado/
-Allow: /diretorio-privado/subdiretorio-publico/
-
-# Bloqueia todos os crawlers de acessar o site
-User-agent: *
-Disallow: /
+Disallow: /admin
