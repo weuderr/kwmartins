@@ -87,6 +87,56 @@
         </div>
     </div>
 
+    <!-- Modal transparecen 95 -->
+    <div class="modal fade" id="modalAgendamento" tabindex="-1" role="dialog" aria-labelledby="modalAgendamentoLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.50);">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAgendamentoLabel">Promoção exclusiva</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border-radius: 5px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="red-line">
+                    <p style="background-color: #F13776; padding: 5px; width: 100%; color: white; text-align: center; font-weight: bold;">
+                        Ganhe 25% de desconto indicando 3 contatos
+                    </p>
+                </div>
+                <p style="text-align: center; padding: 5px">
+                    Pre-agende um procedimento e garanta seu desconto
+                </p>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="categoria">Categoria</label>
+                            <select class="form-control" id="categoria">
+                                <!-- Opções de categoria aqui -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="servico">Serviço</label>
+                            <select class="form-control" id="servico">
+                                <!-- Opções de serviço aqui -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" class="form-control" id="name" placeholder="Seu nome">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Seu telefone">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button id="btnAgendar" type="button" class="btn btn-primary">Agendar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <script>
     const serviceCards = document.querySelectorAll('.service-card');
 

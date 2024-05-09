@@ -36,6 +36,7 @@
         $queryAppointment = $database->prepare('INSERT INTO appointments (notes, client_id, created_at) VALUES (:notes, :client_id, :created_at) RETURNING id');
         $queryAppointment->bindParam(':notes', $message);
         $queryAppointment->bindParam(':client_id', $client_id);
+        $queryAppointment->bindParam(':status', 'pending');
         $queryAppointment->bindParam(':created_at', date('Y-m-d H:i:s'));
         $queryAppointment->execute();
         $appointment_id = $queryAppointment->fetchColumn();

@@ -76,6 +76,10 @@ $(document).ready(function() {
     }
 
     function openAppointment(id, name) {
+        if(!id && !name) {
+            id = selectCategoria.val();
+            name = selectCategoria.find('option:selected').text();
+        }
         fbq('track', 'ViewContent');
         $('[name="message"]').val(name);
         $('#modalAppointmentName').text(name);
@@ -93,12 +97,22 @@ $(document).ready(function() {
     function sendAppointment() {
         const name = $('#name').val();
         const phone = $('#phone').val();
+
+        if (phone.length < 9) {
+            alert('Número de telefone inválido');
+            return;
+        }
+
+        if (name.length < 2) {
+            alert('Nome inválido');
+            return;
+        }
+
         const msg = $('[name="message"]').val();
         const professionalPhone = $('[name="professional-phone"]').val();
-        fbq('track', 'Lead');
 
         if (name || phone ) {
-            const fullText = `Olá, meu nome é ${name}. \nEstou entrando em contato para agendar um horário. \nPor favor, poderia me informar os horários disponíveis para ${msg}? Muito obrigado(a) pela atenção.`;
+            const fullText = `Procedimento: ${msg}`;
             const dataSend = {
                 name: name,
                 phone: phone,
@@ -117,9 +131,7 @@ $(document).ready(function() {
                 }
             });
 
-            window.open('https://api.whatsapp.com/send?phone=' + professionalPhone + '&text=' + encodeURIComponent(fullText));
-            // Ssend fbq track enviar solicitação
-
+            fbq('track', 'Lead');
             <!-- Event snippet for Visualização de página conversion page -->
             gtag('event', 'conversion', {
                 'send_to': 'AW-16557132820/UO70CNKcxq0ZEJSYh9c9',
@@ -128,6 +140,9 @@ $(document).ready(function() {
             });
 
             $('#appointmentModal').modal('hide');
+            $('#modalAgendamento').modal('hide');
+
+            alert('Pre-agendamento realizado com sucesso! Aguarde o contato do profissional.');
         } else {
             alert('Preencha todos os campos!');
         }
@@ -230,4 +245,89 @@ $(document).ready(function() {
         }
         console.log(metaDescription);
     }
+
+
+
+
+
+    let selectCategoria = $('#categoria');
+    selectCategoria.html('');
+
+    let opcao = $('<option></option>').attr('value', '').text('Selecione uma categoria');
+    selectCategoria.append(opcao);
+
+    let selectServico = $('#servico');
+    selectServico.html('');
+    let opcao2 = $('<option></option>').attr('value', '').text('Selecione um serviço');
+    selectServico.append(opcao2);
+
+    let categorias = ['Alongamento de unhas', 'Estético', 'Manicure', 'Pedicure', 'Pestanas', 'Sobrancelhas'];
+    for (let i = 0; i < categorias.length; i++) {
+        let opcao = $('<option></option>').attr('value', categorias[i]).text(categorias[i]);
+        selectCategoria.append(opcao);
+    }
+
+    function showPromoModal() {
+        const lastShown = localStorage.getItem('modalLastShown');
+
+        if (!lastShown) {
+            $('#modalAgendamento').modal('show');
+            localStorage.setItem('modalLastShown', Date.now());
+        } else {
+            const diff = Date.now() - lastShown;
+
+            if (diff >= 3600000) {
+                $('#modalAgendamento').modal('show');
+                localStorage.setItem('modalLastShown', Date.now());
+            }
+        }
+    }
+
+    showPromoModal();
+
+    selectCategoria.on('change', function() {
+        selectServico.html('');
+        let categoriaSelecionada = $(this).val();
+
+        let opcao2 = $('<option></option>').attr('value', '').text('Selecione um serviço');
+        selectServico.append(opcao2);
+
+        $.ajax({
+            url: 'get-services.php',
+            method: 'POST',
+            data: { categoria: categoriaSelecionada },
+            success: function(response) {
+                let services = response.services;
+
+                for (let i = 0; i < services.length; i++) {
+                    let opcao = $('<option></option>').attr('value', services[i].id).text(services[i].name);
+                    selectServico.append(opcao);
+                }
+            }
+        });
+    });
+
+    $('#modalAgendamento').on('show.bs.modal', function() {
+        selectCategoria.prop('selectedIndex', 0);
+        selectServico.html('');
+        $('#name').val('');
+        $('#phone').val('');
+    });
+
+    $('#modalAgendamento').on('shown.bs.modal', function() {
+        selectCategoria.focus();
+    });
+
+    //if button agendar is clicked
+    $('#btnAgendar').on('click', function() {
+        selectedService.id = selectServico.val();
+        const nameService = selectServico.find('option:selected').text();
+        $('[name="message"]').val(nameService);
+        if (!selectedService) {
+            alert('Selecione um serviço');
+            return;
+        }
+        sendAppointment();
+    });
+
 });

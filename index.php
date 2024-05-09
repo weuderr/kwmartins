@@ -72,7 +72,7 @@ function loadPageContent($uri) {
     <?php include('pages/modalAppointment.php'); ?>
 
     <div id="gdpr-consent-container" class="gdpr-consent-container">
-        <div class="gdpr-consent-content">
+        <div class="gdpr-consent-content p-2">
             <p>Este site usa cookies para garantir que você obtenha a melhor experiência em nosso site. <a href="/politica-de-privacidade">Saiba mais</a></p>
             <button id="accept-gdpr">Aceitar</button>
         </div>

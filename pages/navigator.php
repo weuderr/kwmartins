@@ -5,8 +5,10 @@
             Martins
         </a>
         <ul class="navbar-nav ml-auto" style="flex-direction: row;">
-            <a class="nav-link" style="margin-right: 10px;" href="https://www.facebook.com/kwmartinsb" target="_blank"><i class="fab fa-facebook-square" style="color: #7676ff"></i></a>
-            <a class="nav-link" href="https://www.instagram.com/kwmartinsbeauty" target="_blank"><i class="fab fa-instagram" style="color: orange"></i></a>
+            <a class="nav-link" style="margin-right: 10px;" href="https://www.facebook.com/kwmartinsb" target="_blank"><i class="fab fa-lg fa-facebook-square" style="color: #7676ff"></i></a>
+            <a class="nav-link" style="margin-right: 10px;" href="https://www.instagram.com/kwmartinsbeauty" target="_blank"><i class="fab fa-lg fa-instagram" style="color: orange"></i></a>
+            <a class="nav-link" style="margin-right: 10px;" href="https://www.tiktok.com/@kwmartinsoficial" target="_blank"><i class="fab fa-tiktok" style="color: #FFF"></i></a>
+            <a class="nav-link" style="margin-right: 10px;" href="https://api.whatsapp.com/send?phone=351939000856&text=Ol%C3%A1%20gostaria%20de%20fazer%20um%20agendamento" target="_blank"><i class="fab fa-lg fa-whatsapp" style="color: #25d366"></i></a>
         </ul>
     </div>
 
