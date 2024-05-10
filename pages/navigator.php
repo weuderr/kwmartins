@@ -23,7 +23,7 @@
                 <li class="nav-item"><a class="nav-link" id="missao" href="/missao">Missao</a></li>
                 <li class="nav-item"><a class="nav-link" id="servicos" href="/servicos">Serviços</a></li>
                 <li class="nav-item"><a class="nav-link" id="galeria" href="/galeria">Galeria</a></li>
-                <li class="nav-item"><a class="nav-link" id="depoimentos" href="/depoimentos">Depoimentos</a></li>
+                <li class="nav-item"><a class="nav-link" id="localizacao" href="/localizacao">Localização</a></li>
                 <li class="nav-item"><a class="nav-link" id="pagesartigos" href="/pages/artigos/">Artigos</a></li>
             </ul>
         </div>

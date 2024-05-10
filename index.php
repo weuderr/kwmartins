@@ -28,8 +28,8 @@ function loadPageContent($uri) {
         case '/galeria':
             include('pages/sections/galeria.php');
             break;
-        case '/depoimentos':
-            include('pages/sections/depoimentos.php');
+        case '/localizacao':
+            include('pages/sections/contato.php');
             break;
         case '/faq':
             include('pages/sections/faq.php');
@@ -51,6 +51,10 @@ function loadPageContent($uri) {
 <html lang="pt">
 <?php include('pages/head.php'); ?>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MV8PF47M"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <?php include('pages/navigator.php'); ?>
     <div class="header text-center mb-0">
         <img src="assets/img/BannerKW.png" alt="Banner principal da KW Martins destacando serviços de beleza" class="img-fluid">

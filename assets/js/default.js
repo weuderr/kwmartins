@@ -80,17 +80,28 @@ $(document).ready(function() {
             id = selectCategoria.val();
             name = selectCategoria.find('option:selected').text();
         }
-        fbq('track', 'ViewContent');
         $('[name="message"]').val(name);
         $('#modalAppointmentName').text(name);
         $('#appointmentModal').modal('show');
         const service = allServicos.filter(servico => servico.id == id);
         selectedService = service[0];
 
+        fbq('track', 'ViewContent');
         gtag('event', 'interest', {
             'event_category': 'appointment',
             'event_label': 'open',
             'value': selectedService?.price,
+        });
+        ttq.track('ViewContent', {
+            "contents": [
+                {
+                    "content_id": selectedService?.id, // string. ID of the product. Example: "1077218".
+                    "content_type": "Appointment", // string. Either product or product_group.
+                    "content_name": selectedService?.name, // string. The name of the page or product. Example: "shirt".
+                }
+            ],
+            "value": selectedService?.price, // number. Value of the order or items sold. Example: 100.
+            "currency": "EUR" // string. The 4217 currency code. Example: "USD".
         });
     }
 
@@ -137,6 +148,19 @@ $(document).ready(function() {
                 'send_to': 'AW-16557132820/UO70CNKcxq0ZEJSYh9c9',
                 'value': selectedService?.price,
                 'currency': 'EUR'
+            });
+
+            ttq.track('Contact', {
+                "contents": [
+                    {
+                        "content_id": selectedService?.id, // string. ID of the product. Example: "1077218".
+                        "content_type": "Appointment", // string. Either product or product_group.
+                        "content_name": selectedService?.name, // string. The name of the page or product. Example: "shirt".
+                        "price": selectedService?.price
+                    }
+                ],
+                "value": selectedService?.price, // number. Value of the order or items sold. Example: 100.
+                "currency": "EUR" // string. The 4217 currency code. Example: "USD".
             });
 
             $('#appointmentModal').modal('hide');
