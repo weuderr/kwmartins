@@ -1,7 +1,10 @@
 # Permite que todos os crawlers acessem tudo
 User-agent: *
-Disallow: /
+Disallow:
 
-# Bloqueia o acesso a um diretório específico
+# Bloqueia o acesso ao diretório admin
 User-agent: *
-Disallow: /admin
+Disallow: /admin/
+
+Crawl-delay: 5
+Sitemap: https://kwmartins.pt/assets/sitemap.xml

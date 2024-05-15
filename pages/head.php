@@ -32,8 +32,17 @@
     <meta name="msapplication-TileImage" content="https://kwmartins.pt/assets/img/icon-logo.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="KW Martins">
-    <meta name="keywords" content="KW, Martins, KW Martins, beleza, estética, tratamentos, bem-estar, sobrancelhas, design de sobrancelhas, micropigmentação, unhas, manicure, pedicure, unhas de gel, estética de sobrancelhas, cuidados com as unhas">
+    <meta name="apple-mobile-web-app-title" content="KW Martins"><meta name="keywords" content="KW Martins, beleza, estética, tratamentos, bem-estar, sobrancelhas, design de sobrancelhas, micropigmentação, unhas, manicure, pedicure, unhas de gel, estética de sobrancelhas, cuidados com as unhas, autoestima, mulheres, qualidade, inovação, confiança, spa,  nails, tecnologia avançada, relaxamento, produtos premium, serviços personalizados, ambiente acolhedor, resultados excepcionais, empoderamento feminino, modernidade, satisfação do cliente, transformação, cuidado pessoal, estilo de vida saudável, tratamentos faciais, ambiente acolhedor">
+    <meta name="author" content="KW Martins">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="language" content="Portuguese">
+    <meta name="generator" content="VS Code">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="description">
 
     <link rel="apple-touch-icon" sizes="180x180" href="https://kwmartins.pt/assets/img/icon-logo-50x50.png">

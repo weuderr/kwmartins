@@ -25,6 +25,7 @@
                 <li class="nav-item"><a class="nav-link" id="galeria" href="/galeria">Galeria</a></li>
                 <li class="nav-item"><a class="nav-link" id="localizacao" href="/localizacao">Localização</a></li>
                 <li class="nav-item"><a class="nav-link" id="pagesartigos" href="/pages/artigos/">Artigos</a></li>
+                <li class="nav-item"><a class="nav-link" id="parceria" href="/parceria">parceria</a></li>
             </ul>
         </div>
     </div>
