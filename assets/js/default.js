@@ -8,7 +8,6 @@ $(document).ready(function() {
     let allCategories = [];
     let selectedService = {};
 
-
     function obterCategorias() {
 
         $.ajax({
@@ -109,11 +108,11 @@ $(document).ready(function() {
             return;
         }
 
-        const msg = $('[name="message"]').val();
+        this.msgAgendamento += $('[name="message"]').val();
         const professionalPhone = $('[name="professional-phone"]').val();
 
         if (name || phone ) {
-            const fullText = `Procedimento: ${msg}`;
+            const fullText = `Procedimento: ${this.msgAgendamento}`;
             const dataSend = {
                 name: name,
                 phone: phone,

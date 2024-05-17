@@ -164,21 +164,21 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalAgendamentoLabel">Pre-Agendamento</h5>
+                    <h5 class="modal-title" id="modalAgendamentoLabel">Pre-agendamento</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border-radius: 5px;">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <!--
-                <div class="red-line">
-                    <p style="background-color: #F13776; padding: 5px; width: 100%; color: white; text-align: center; font-weight: bold;">
-                        Ganhe 25% de desconto indicando 3 contatos
+                <div id="promo-msg" style="display: none;">
+                    <div class="red-line">
+                        <p style="background-color: #F13776; padding: 5px; width: 100%; color: white; text-align: center; font-weight: bold;">
+                            Primeira manutenção grátis!
+                        </p>
+                    </div>
+                    <p style="text-align: center; padding: 5px; color: #717171;font-size: 12px;">
+                        Oferta única e exclusiva de campanha. Não perca!
                     </p>
                 </div>
-                -->
-                <p style="text-align: center; padding: 5px">
-                    Pre-agende um procedimento de forma rápida e segura.
-                </p>
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
@@ -218,5 +218,17 @@
         card.addEventListener('click', () => {
             window.location.href = 'servicos?service=' + encodeURIComponent(card.querySelector('h3').innerText);
         });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+        if (document.getElementById('promo-msg').style.display === 'block') {
+            $('#modalAgendamento').on('hide.bs.modal', function (e) {
+                if (confirm('Não será possível abrir o modal novamente. Deseja continuar?')) {
+                    $('#modalAgendamento').modal('hide');
+                }
+            });
+        }
+        }, 2000);
     });
 </script>

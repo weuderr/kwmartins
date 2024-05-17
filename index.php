@@ -37,6 +37,7 @@ include('pages/colect-info.php');
     <!-- End Google Tag Manager (noscript) -->
 
     <div id="main-content" style="display: none;">
+        <?php include('pages/firebar.php'); ?>
         <?php include('pages/navigator.php'); ?>
         <div class="header text-center mb-0">
             <img src="assets/img/BannerKWFull.png" alt="Banner principal da KW Martins destacando serviços de beleza" class="img-fluid img-banner">
