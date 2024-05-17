@@ -39,7 +39,7 @@ include('pages/colect-info.php');
     <div id="main-content" style="display: none;">
         <?php include('pages/navigator.php'); ?>
         <div class="header text-center mb-0">
-            <img src="assets/img/BannerKW.png" alt="Banner principal da KW Martins destacando serviços de beleza" class="img-fluid">
+            <img src="assets/img/BannerKWFull.png" alt="Banner principal da KW Martins destacando serviços de beleza" class="img-fluid img-banner">
         </div>
 
         <div class="container">
@@ -50,7 +50,6 @@ include('pages/colect-info.php');
         </div>
 
         <?php include('pages/footer.php'); ?>
-        <?php include('pages/modalAppointment.php'); ?>
 
         <div id="gdpr-consent-container" class="gdpr-consent-container">
             <div class="gdpr-consent-content p-2">

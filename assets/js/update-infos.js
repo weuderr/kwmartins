@@ -21,7 +21,7 @@ $(document).ready(function() {
             longitude = position.coords.longitude;
 
             // Atualiza as informações no banco de dados, incluindo a localização
-            console.error("Geolocalização obtida: ", latitude, longitude);
+            console.log("Geolocalização obtida: ", latitude, longitude);
             atualizarInformacoes(latitude, longitude);
         }, function(error) {
             console.error("Erro ao obter localização geográfica: ", error);

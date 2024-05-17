@@ -1,13 +1,3 @@
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1133221804700004');
-
 function Sleep(number) {
     return new Promise(resolve => setTimeout(resolve, number));
 }
@@ -82,7 +72,7 @@ $(document).ready(function() {
         }
         $('[name="message"]').val(name);
         $('#modalAppointmentName').text(name);
-        $('#appointmentModal').modal('show');
+        // $('#appointmentModal').modal('show');
         const service = allServicos.filter(servico => servico.id == id);
         selectedService = service[0];
 
@@ -163,7 +153,7 @@ $(document).ready(function() {
                 "currency": "EUR" // string. The 4217 currency code. Example: "USD".
             });
 
-            $('#appointmentModal').modal('hide');
+            // $('#appointmentModal').modal('hide');
             $('#modalAgendamento').modal('hide');
 
             alert('Pre-agendamento realizado com sucesso! Aguarde o contato do profissional.');
@@ -307,7 +297,7 @@ $(document).ready(function() {
         }
     }
 
-    showPromoModal();
+    // showPromoModal();
 
     selectCategoria.on('change', function() {
         selectServico.html('');
@@ -322,18 +312,26 @@ $(document).ready(function() {
             data: { categoria: categoriaSelecionada },
             success: function(response) {
                 let services = response.services;
-
                 for (let i = 0; i < services.length; i++) {
                     let opcao = $('<option></option>').attr('value', services[i].id).text(services[i].name);
                     selectServico.append(opcao);
                 }
+                // servico_div show
+                $('#servico_div').show();
             }
         });
+    });
+
+    selectServico.on('change', function() {
+        $('#nome_div').show();
+        $('#telefone_div').show();
+        $('#btnCancelAgendamento').hide();
     });
 
     $('#modalAgendamento').on('show.bs.modal', function() {
         selectCategoria.prop('selectedIndex', 0);
         selectServico.html('');
+        selectServico.prop('selectedIndex', 0);
         $('#name').val('');
         $('#phone').val('');
     });
@@ -352,6 +350,13 @@ $(document).ready(function() {
             return;
         }
         sendAppointment();
+    });
+
+    $('#modalAgendamento').on('hidden.bs.modal', function() {
+        $('#servico_div').hide();
+        $('#nome_div').hide();
+        $('#telefone_div').hide();
+        $('#btnCancelAgendamento').show();
     });
 
 });
