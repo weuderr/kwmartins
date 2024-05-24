@@ -21,4 +21,4 @@
 <h3>Alterações a esta Política de Privacidade</h3>
 <p>Podemos atualizar esta política de privacidade periodicamente. Recomendamos que você verifique esta página ocasionalmente para garantir que você esteja ciente de quaisquer alterações. Se fizermos alterações significativas nesta política de privacidade, podemos notificá-lo por e-mail ou colocando um aviso em nosso site.</p>
 <h3>Contato</h3>
-<p>Se você tiver alguma dúvida sobre esta política de privacidade, entre em contato conosco através do e-mail: <a href="mailto:contato@kwmartins.pt">
+<p>Se você tiver alguma dúvida sobre esta política de privacidade, entre em contato conosco através do: <a href="/contato">Contato</a>

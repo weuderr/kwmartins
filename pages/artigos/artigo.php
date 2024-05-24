@@ -13,7 +13,7 @@
             $result = $database->query("SELECT * FROM articles");
 
             foreach ($result as $row) {
-                echo "<a class='menu-link' href='?id=" . $row['id'] . "'>" . $row['name'] . "</a><br>";
+                echo "<a class='menu-link' href='?id=" . $row['id'] . "'>" . $row['name'] . "</a>";
             }
         ?>
     </div>

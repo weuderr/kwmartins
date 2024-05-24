@@ -175,7 +175,7 @@ $(document).ready(function() {
                             <p class="card-text">${servico.description}</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <button class="btn btn-custom float-right" onclick="openAppointment('${servico.id}', '${servico.name}')">Agendar</button>
+                            <button class="btn btn-principal float-right" onclick="openAppointment('${servico.id}', '${servico.name}')">Agendar</button>
                         </div>
                     </div>
                 </div>

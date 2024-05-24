@@ -4,12 +4,6 @@
             <img src="https://kwmartins.pt/assets/img/icon-logo-50x50.png" alt="KW Martins" class="d-inline-block align-top" loading="lazy" style="width: 30px; height: 30px;"/>
             Martins
         </a>
-        <ul class="navbar-nav ml-auto" style="flex-direction: row;">
-            <a class="nav-link" style="margin-right: 10px;" href="https://www.facebook.com/kwmartinsb" target="_blank"><i class="fab fa-lg fa-facebook-square" style="color: #7676ff"></i></a>
-            <a class="nav-link" style="margin-right: 10px;" href="https://www.instagram.com/kwmartinsbeauty" target="_blank"><i class="fab fa-lg fa-instagram" style="color: orange"></i></a>
-            <a class="nav-link" style="margin-right: 10px;" href="https://www.tiktok.com/@kwmartinsoficial" target="_blank"><i class="fab fa-tiktok" style="color: #FFF"></i></a>
-            <a class="nav-link" style="margin-right: 10px;" href="https://api.whatsapp.com/send?phone=351939000856&text=Ol%C3%A1%20gostaria%20de%20fazer%20um%20agendamento" target="_blank"><i class="fab fa-lg fa-whatsapp" style="color: #25d366"></i></a>
-        </ul>
     </div>
 
     <div>
@@ -19,13 +13,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" id="quem-somos" href="/quem-somos">Quem Somos</a></li>
-                <li class="nav-item"><a class="nav-link" id="missao" href="/missao">Missao</a></li>
                 <li class="nav-item"><a class="nav-link" id="servicos" href="/servicos">Serviços</a></li>
                 <li class="nav-item"><a class="nav-link" id="galeria" href="/galeria">Galeria</a></li>
-                <li class="nav-item"><a class="nav-link" id="localizacao" href="/localizacao">Localização</a></li>
                 <li class="nav-item"><a class="nav-link" id="pagesartigos" href="/pages/artigos/">Artigos</a></li>
-                <li class="nav-item"><a class="nav-link" id="parceria" href="/parceria">parceria</a></li>
             </ul>
         </div>
     </div>

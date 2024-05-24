@@ -162,7 +162,7 @@
                     </a></p>
                 </div>
                     <p>Entre em contato conosco através do WhatsApp para agendar uma consulta ou tirar dúvidas.</p>
-                    <a href="https://api.whatsapp.com/send?phone=351966296791&text=Gostaria%20de%20de%20uma%20tirar%20d%C3%BAvida"class="btn btn-custom" target="_blank">Contato via WhatsApp</a>
+                    <a href="https://api.whatsapp.com/send?phone=351966296791&text=Gostaria%20de%20de%20uma%20tirar%20d%C3%BAvida"class="btn btn-principal" target="_blank">Contato via WhatsApp</a>
                 </div>
             </div>
         </div>

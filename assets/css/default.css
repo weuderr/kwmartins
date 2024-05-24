@@ -1,27 +1,97 @@
 .header, .footer { background-color: #000; color: #fff; }
 .navbar-custom { background-color: #000000; }
 .navbar-custom, .navbar-custom a.nav-link { color: #fff; }
-.navbar-custom a:hover, .btn-custom:hover { color: #F13776; }
 .navbar-custom a { color: #fff; }
-.btn-custom { background-color: #F13776; color: #fff; border: none; padding: 10px 20px; }
-.card-custom { flex: 0 0 100%; max-width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+
+.navbar-custom a:hover, .btn-principal:hover { color: #d97b9c; }
+.navbar-custom a:hover, .btn-action:hover { color: #41bb37; }
+.navbar-custom a:hover, .btn-secondary:hover { color: #000000; }
+
+.btn-principal { background-color: #d97b9c; color: #fff; border: none; padding: 10px 20px; }
+.btn-action { background-color: #41bb37; color: #fff; border: none; padding: 10px 20px; }
+.btn-secondary { background-color: #000000; color: #fff; border: none; padding: 10px 20px; }
+
+.card { flex: 0 0 100%; max-width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
 .card-body { height: auto; display: flex; flex-direction: column; justify-content: center; padding: 20px; }
 .gallery-img { padding: 5px; }
 img { width: 100%; height: auto; }
-.testimonial, .faq { background-color: #f8f9fa; padding: 20px; margin-bottom: 20px; border-radius: 5px; }
+.testimonial, .faq { background-color: #f8f9fa; padding: 5px; margin-bottom: 20px; border-radius: 5px; }
 .faq-question { font-weight: bold; }
 .active {
-    background-color: #F13776;
+    background-color: #d97b9c;
     border-radius: 5px;
     padding: 5px 10px;
 }
 
 body {
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f8f8;
     transition: background-color 0.5s ease;
     font-family: 'Arial', sans-serif;
     height: 100%;
     margin: 0;
-    padding: 0;
+}
+
+h2, h3 {
+    color: #d97b9c;
+}
+
+a {
+    color: #d97b9c;
+    text-decoration: none;
+}
+h5 {
+    color: #d97b9c;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.faq {
+    margin-bottom: 5px;
+}
+.faq-question {
+    font-weight: bold;
+    color: #d97b9c;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.faq-answer {
+    display: none;
+    margin-left: 20px;
+}
+.faq-question:hover {
+    text-decoration: underline;
+}
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+    h5 {
+        font-size: 20px;
+    }
+}
+/*------*/
+
+.footer-container a:hover {
+    text-decoration: underline;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
 }
 
 a:hover {
@@ -29,8 +99,35 @@ a:hover {
     transition: color 0.3s ease;
 }
 
-.btn-custom {
-    transition: background-color 0.3s ease, color 0.3s ease;
+.btn {
+    position: relative;
+    overflow: hidden;
+    /*transition: background-color 0.3s ease, color 0.3s ease;*/
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn:active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.8) 10%, transparent 10.01%);
+    background-size: 10% 10%;
+    transform: translate(-50%, -50%) scale(1);
+    animation: fireworks 0.4s forwards;
+    z-index: -1;
+}
+
+@keyframes fireworks {
+    to {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
 }
 
 .card-custom:hover {
@@ -50,9 +147,9 @@ a:hover {
     transform: translateY(-5px); /* Efeito "levantar" ao passar o mouse */
 }
 .card-header {
-    background-color: #F13776; /* Rosa KW - Martins */
+    background-color: #d97b9c; /* Rosa KW - Martins */
     color: white; /* Texto branco */
-    border-bottom: 1px solid #F13776; /* Para manter consistência caso o card-header tenha borda */
+    border-bottom: 1px solid #d97b9c; /* Para manter consistência caso o card-header tenha borda */
 }
 .card-body {
     background-color: white; /* Fundo branco */
@@ -101,7 +198,7 @@ html {
 }
 
 /* Estilos para Botões */
-.btn-custom {
+.btn {
     border-radius: 50px;
     padding: 10px 30px;
     font-weight: bold;
@@ -109,7 +206,7 @@ html {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-custom:hover, .btn-custom:focus {
+.btn:hover, .btn:focus {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     transform: scale(1.05);
 }
@@ -167,7 +264,7 @@ html {
 }
 
 .navbar-toggler-icon {
-    background-color: #F13776;
+    background-color: #d97b9c;
     padding: 2px;
     border-radius: 5px;
 }
@@ -180,11 +277,9 @@ a {
 }
 
 .img-banner {
-    min-height: 100px;
-    max-height: 200px;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
-    width: 100%;
-    height: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -527,3 +622,18 @@ a {
     margin: 0 auto;
     display: block;
 }
+
+.whatsapp-button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+    border-radius: 25px;
+    padding: 15px 20px;
+    background-color: #ffffff66;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+

@@ -2,7 +2,7 @@
         <div class="welcome-section mt-5 text-center">
             <h1>KW Martins</h1>
             <p>Aqui você encontra informações detalhadas sobre nossos serviços, produtos e muito mais. Não deixe de visitar nossas redes sociais e conferir as novidades.</p>
-            <button class="btn btn-custom" data-toggle="modal" data-target="#modalAgendamento">Agende seu horário</button>
+            <button class="btn btn-action" data-toggle="modal" data-target="#modalAgendamento">Agende seu horário</button>
         </div>
 
         <!-- Seção de Trabalhos -->
@@ -30,30 +30,17 @@
                     </div>
                 </div>
                 <div class="text-center mt-3">
-                    <button class="btn btn-custom m-1" onclick="window.location.href = 'galeria'">Ver mais</button>
-                    <button class="btn btn-custom m-1" data-toggle="modal" data-target="#modalAgendamento">Agende seu horário</button>
+                    <button class="btn btn-principal m-1" onclick="window.location.href = 'galeria'">Ver mais</button>
+                    <button class="btn btn-action m-1" data-toggle="modal" data-target="#modalAgendamento">Agende seu horário</button>
                 </div>
             </div>
         </div>
 
-        <!-- Integração com Redes Sociais -->
-        <div class="redes-sociais mt-5 text-center">
-            <h2>Siga-nos nas Redes Sociais</h2>
-            <div class="social-links d-flex justify-content-center">
-                <a class="nav-link" href="https://www.facebook.com/kwmartinsb" target="_blank">
-                    <i class="fab fa-lg fa-facebook-square" style="color: #7676ff"></i>
-                </a>
-                <a class="nav-link" href="https://www.instagram.com/kwmartinsbeauty" target="_blank">
-                    <i class="fab fa-lg fa-instagram" style="color: orange"></i>
-                </a>
-                <a class="nav-link" href="https://www.tiktok.com/@kwmartinsoficial" target="_blank">
-                    <i class="fab fa-tiktok" style="color: #000"></i>
-                </a>
-                <a class="nav-link" href="https://api.whatsapp.com/send?phone=351939000856&text=Ol%C3%A1%20gostaria%20de%20fazer%20um%20agendamento" target="_blank">
-                    <i class="fab fa-lg fa-whatsapp" style="color: #25d366"></i>
-                </a>
-            </div>
-        </div>
+        <a class="nav-link btn whatsapp-button"
+            href="https://api.whatsapp.com/send?phone=351939000856&text=Ol%C3%A1%20gostaria%20de%20fazer%20um%20agendamento" target="_blank">
+            <span style="color: #25d366; font-weight: bold;">Atendimento</span>
+            <i class="fab fa-lg fa-whatsapp" style="color: #25d366; margin-left: 10px;"></i>
+        </a>
 
         <!-- Seção de Serviços -->
         <div class="row mt-5" id="servicos">
@@ -66,7 +53,7 @@
                             <h3 class="text-center">Alongamento de unhas</h3>
                             <p>Esta categoria inclui serviços que visam alongar as unhas. Os serviços nesta categoria geralmente levam de tempo variável e os preços variam.</p>
                             <footer class="text-center">
-                                <button class="btn btn-custom">Confira os serviços</button>
+                                <button class="btn btn-secondary">Confira os serviços</button>
                             </footer>
                         </div>
                     </div>
@@ -76,7 +63,7 @@
                             <h3 class="text-center">Estético</h3>
                             <p>Esta categoria inclui serviços estéticos. Os serviços nesta categoria geralmente levam de tempo variável e o preço é de valor variável.</p>
                             <footer class="text-center">
-                                <button class="btn btn-custom">Confira os serviços</button>
+                                <button class="btn btn-secondary">Confira os serviços</button>
                             </footer>
                         </div>
                     </div>
@@ -86,7 +73,7 @@
                             <h3 class="text-center">Manicure</h3>
                             <p>Esta categoria inclui serviços de cuidado e embelezamento das unhas das mãos. Os serviços nesta categoria geralmente levam de tempo variável e os preços variam.</p>
                             <footer class="text-center">
-                                <button class="btn btn-custom">Confira os serviços</button>
+                                <button class="btn btn-secondary">Confira os serviços</button>
                             </footer>
                         </div>
                     </div>
@@ -96,7 +83,7 @@
                             <h3 class="text-center">Pedicure</h3>
                             <p>Esta categoria inclui serviços de cuidado e embelezamento das unhas dos pés. Os serviços nesta categoria geralmente levam de tempo variável e os preços variam.</p>
                             <footer class="text-center">
-                                <button class="btn btn-custom">Confira os serviços</button>
+                                <button class="btn btn-secondary">Confira os serviços</button>
                             </footer>
                         </div>
                     </div>
@@ -106,7 +93,7 @@
                             <h3 class="text-center">Pestanas</h3>
                             <p>Esta categoria inclui serviços de extensão de pestanas. Os serviços nesta categoria geralmente levam de tempo variável e os preços variam.</p>
                             <footer class="text-center">
-                                <button class="btn btn-custom">Confira os serviços</button>
+                                <button class="btn btn-secondary">Confira os serviços</button>
                             </footer>
                         </div>
                     </div>
@@ -116,7 +103,7 @@
                             <h3 class="text-center">Sobrancelhas</h3>
                             <p>Esta categoria inclui serviços de design e embelezamento das sobrancelhas. Os serviços nesta categoria geralmente levam de tempo variável e os preços variam.</p>
                             <footer class="text-center">
-                                <button class="btn btn-custom">Confira os serviços</button>
+                                <button class="btn btn-secondary">Confira os serviços</button>
                             </footer>
                         </div>
                     </div>
