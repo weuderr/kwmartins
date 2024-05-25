@@ -192,11 +192,11 @@ $(document).ready(function() {
         const section = window.location.pathname.split('/').pop().split('.').shift();
         console.log(section);
         const sectionElement = document.getElementById(section);
-        $('.nav-item').removeClass('active');
+        $('.nav-item').removeClass('nav-active');
         if (sectionElement) {
             sectionElement.style.display = 'block';
             sectionElement.scrollIntoView({ behavior: 'smooth' });
-            $(`#${section}`).parent().addClass('active');
+            $(`#${section}`).parent().addClass('nav-active');
         }
     }
 

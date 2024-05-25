@@ -17,7 +17,7 @@
 img { width: 100%; height: auto; }
 .testimonial, .faq { background-color: #f8f9fa; padding: 5px; margin-bottom: 20px; border-radius: 5px; }
 .faq-question { font-weight: bold; }
-.active {
+.nav-active {
     background-color: #d97b9c;
     border-radius: 5px;
     padding: 5px 10px;
@@ -57,6 +57,11 @@ a:hover {
     padding: 20px;
 }
 
+.container-fluid {
+    padding: 5px;
+}
+
+
 .faq {
     margin-bottom: 5px;
 }
@@ -80,6 +85,10 @@ a:hover {
     h5 {
         font-size: 20px;
     }
+}
+@font-face {
+    font-family: 'Gabriola';
+    src: url('https://fonts.cdnfonts.com/s/12303/Gabriola.woff') format('woff');
 }
 /*------*/
 
@@ -274,13 +283,6 @@ a {
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-
-.img-banner {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .content {
@@ -601,10 +603,15 @@ a {
 }
 
 #depoimentos {
+    background-color: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: block;
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 20px;
+    padding: 20px 0 0 0;
+    border-radius: 15px;
+    margin: 0;
 }
 
 #depoimentos p {
@@ -637,3 +644,120 @@ a {
     text-decoration: none;
 }
 
+.kw-font {
+    font-family: 'Gabriola', sans-serif;
+}
+
+
+
+.logo-container {
+    display: inline-block;
+    text-align: center;
+    margin: 20px;
+}
+
+.logo {
+    width: 300px;
+}
+
+.logo-text {
+    font-family: 'Gabriola', sans-serif;
+    font-size: 3em;
+    color: #000;
+}
+
+.kw {
+    font-family: 'Gabriola', sans-serif;
+    font-size: 30px;
+    color: #fff;
+    background-color: #ee2571;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0px auto;
+}
+
+.logo-subtext {
+    font-family: 'Gabriola', sans-serif;
+    font-size: 1.5em;
+    color: #ee2571;
+}
+
+
+
+
+.carousel-item {
+    position: relative;
+}
+
+.carousel-item-header {
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 72px); /* Ajusta a altura do banner considerando a navbar */
+}
+
+.img-banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-float-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    padding: 20px;
+}
+
+.header-float-bottom {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+}
+
+.header-float-bottom-inverse {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #000;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .header-float-bottom {
+        width: 90%;
+    }
+}
+
+.header-float-top h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}

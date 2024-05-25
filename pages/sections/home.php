@@ -1,15 +1,21 @@
         <!-- Seção de Boas-vindas -->
         <div class="welcome-section mt-5 text-center">
-            <h1>KW Martins</h1>
             <p>Aqui você encontra informações detalhadas sobre nossos serviços, produtos e muito mais. Não deixe de visitar nossas redes sociais e conferir as novidades.</p>
             <button class="btn btn-action" data-toggle="modal" data-target="#modalAgendamento">Agende seu horário</button>
         </div>
+
 
         <!-- Seção de Trabalhos -->
         <div class="trabalhos mt-5" id="galeria">
             <div class="col-md-12">
                 <h2 class="text-center">Nossos Trabalhos</h2>
                 <div class="galeria-trabalhos d-flex flex-wrap justify-content-center">
+                    <div class="trabalho p-2">
+                        <div class="gallery-img">
+                            <img style="border-radius: 5px" src="../assets/img/galeria/kw-espaco%20(18).jpeg" alt="Imagem de unhas feitas na KW Martins">
+                        </div>
+                        <p>Experimente a elegância do alongamento de unhas na KW Martins. Nossas unhas são o toque perfeito de glamour para qualquer ocasião.</p>
+                    </div>
                     <div class="trabalho p-2">
                         <div class="gallery-img">
                             <img style="border-radius: 5px" src="../assets/img/galeria/kw-espaco%20(17).jpg" alt="Imagem da profissional da KW Martins">
@@ -21,12 +27,6 @@
                             <img style="border-radius: 5px" src="../assets/img/galeria/kw-espaco%20(16).jpg" alt="Imagem de um olhar feito na KW Martins">
                         </div>
                         <p>Realce a beleza dos seus olhos com nossas extensões de cílios! Veja como nossos especialistas podem transformar seu olhar, proporcionando um visual deslumbrante e natural.</p>
-                    </div>
-                    <div class="trabalho p-2">
-                        <div class="gallery-img">
-                            <img style="border-radius: 5px" src="../assets/img/galeria/kw-espaco%20(14).jpg" alt="Imagem de unhas feitas na KW Martins">
-                        </div>
-                        <p>Experimente a elegância do alongamento de unhas na KW Martins. Nossas unhas vermelhas vibrantes são o toque perfeito de glamour para qualquer ocasião.</p>
                     </div>
                 </div>
                 <div class="text-center mt-3">

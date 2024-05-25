@@ -39,12 +39,38 @@ include('pages/colect-info.php');
     <div id="main-content" style="display: none;">
         <?php include('pages/firebar.php'); ?>
         <?php include('pages/navigator.php'); ?>
-        <div class="header text-center mb-0">
-            <img src="assets/img/BannerKWFull.png" alt="Banner principal da KW Martins destacando serviços de beleza" class="img-fluid img-banner">
+
+        <div class="carousel slide header" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item-header active">
+                    <div class="header-float-bottom-inverse">
+                        <a href="/contato" target="_blank">
+                            <p>Rua António Carneiro 147, Matosinhos</p>
+                        </a>
+                    </div>
+                    <img src="assets/img/BannerKWFull.png" class="img-fluid img-banner" alt="Slide 2">
+                </div>
+                <div class="carousel-item">
+                    <div class="header-float-bottom-inverse">
+                        <a href="/contato" target="_blank">
+                            <p>Rua António Carneiro 147, Matosinhos</p>
+                        </a>
+                    </div>
+                    <img src="assets/img/BannerKWFullFachada.png" class="img-fluid img-banner" alt="Slide 1">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#banner-home" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#banner-home" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
 
         <div class="container">
-            <h1 class="visually-hidden">KW Martins - Sua Beleza, Nossa Paixão</h1>
+            <h1 class="visually-hidden">KW Martins - Salão de Beleza, Estética, Manicure e Sobrancelhas</h1>
             <div class="conteudo mt-5">
                 <?php loadPageContent($requestedUri); ?>
             </div>
