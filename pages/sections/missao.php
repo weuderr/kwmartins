@@ -1,4 +1,8 @@
-    <!-- Missao -->
+<?php
+    $pageTitle = "Missao - ";
+?>
+
+<!-- Missao -->
 <div class="container" id="missao">
     <div class="row">
         <div class="col-md-12 mb-4">

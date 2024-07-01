@@ -1,3 +1,7 @@
+<?php
+    $pageTitle = "Geleria - ";
+?>
+
 <!-- Galeria -->
 <div class="row" id="galeria">
     <div class="col-md-12">

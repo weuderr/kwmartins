@@ -1,7 +1,13 @@
+<?php
+    $pageTitle = "Home - ";
+?>
+
         <!-- Seção de Boas-vindas -->
         <div class="welcome-section mt-5 text-center">
-            <p>Aqui você encontra informações detalhadas sobre nossos serviços, produtos e muito mais. Não deixe de visitar nossas redes sociais e conferir as novidades.</p>
-            <button class="btn btn-action" data-toggle="modal" data-target="#modalAgendamento">Agende seu horário</button>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black break-words mb-4">Bem-vindo à KW-Martins - Beleza e Estética</h1>
+            <p class="text-base md:text-lg lg:text-xl max-w-3xl mx-auto text-center">
+              Na KW Martins Beleza e Estética, oferecemos uma ampla gama de serviços para realçar sua beleza e bem-estar. Nossa equipe de especialistas é dedicada a proporcionar cuidados excepcionais em designer de sobrancelhas, extensão de pestanas, micropigmentação e muito mais. Com um enfoque detalhado em estética e manicure, garantimos resultados surpreendentes que elevam sua autoestima e destacam sua beleza natural. Venha experimentar nossos serviços e descubra como podemos transformar sua aparência com técnicas avançadas e um atendimento personalizado.
+            </p>
         </div>
 
 
@@ -36,11 +42,116 @@
             </div>
         </div>
 
+        <!-- Informações de Contato -->
+        <div class="container mt-5">
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-black break-words mb-4" style="text-align: center;">Informações</h2>
+            <div class="row">
+                <div class="col-md-6 contact-info p-3">
+                    <div class="info-section">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span style="font-weight: bold;">Endereço</span>
+                        <div style="margin-left: 30px;">
+                            <span class="d-block">Rua António Carneiro 147 - Matosinhos, PT 4450-047</span>
+                        </div>
+                    </div>
+                    <div class="info-section mt-3">
+                        <i class="fas fa-clock"></i>
+                        <span style="font-weight: bold;">Horário de Funcionamento</span>
+                        <div style="margin-left: 30px;">
+                            <div class="d-block"><span style="font-weight: bold;">Terça-feira: </span><span>09:00 - 17:00</span></div>
+                            <div class="d-block"><span style="font-weight: bold;">Quarta-feira: </span><span>09:00 - 17:00</span></div>
+                            <div class="d-block"><span style="font-weight: bold;">Quinta-feira: </span><span>09:00 - 17:00</span></div>
+                            <div class="d-block"><span style="font-weight: bold;">Sexta-feira: </span><span>09:00 - 17:00</span></div>
+                            <div class="d-block"><span style="font-weight: bold;">Sábado: </span><span>09:00 - 17:00</span></div>
+                        </div>
+                    </div>
+                    <div class="info-section mt-3 mb-5">
+                        <i class="fas fa-phone"></i>
+                        <span style="font-weight: bold;">Número de telefone</span>
+                        <div style="margin-left: 30px;">
+                            <a href="tel:+351939000856" class="">+351 939 000 856</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="map" class="shadow-lg border-0 border-gray-100 rounded-lg" style="height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var map = L.map('map').setView([41.1780044, -8.6754612], 14); // Nível de zoom ajustado para 18
+
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                }).addTo(map);
+
+                L.marker([41.178083, -8.675401]).addTo(map)
+                    .bindPopup('KW Martins')
+                    .openPopup();
+
+                // Ajusta o tamanho do mapa ao contêiner
+                setTimeout(function() {
+                    map.invalidateSize();
+                }, 0);
+            });
+        </script>
+
         <a class="nav-link btn whatsapp-button"
             href="https://api.whatsapp.com/send?phone=351939000856&text=Ol%C3%A1%20gostaria%20de%20fazer%20um%20agendamento" target="_blank">
             <span style="color: #25d366; font-weight: bold;">Atendimento</span>
             <i class="fab fa-lg fa-whatsapp" style="color: #25d366; margin-left: 10px;"></i>
         </a>
+
+
+
+        <!-- Seção de Depoimentos -->
+        <div class="row mt-5" id="depoimentos">
+            <div class="col-md-12 text-center">
+                <h2 class="mb-4">Depoimentos</h2>
+                <div id="depoimentosCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="../assets/img/clientes/cliente (1).png" class="rounded-circle mb-3" alt="Depoimento de cliente 1" style="width: 75px; height: 75px;">
+                                <p class="w-75">Maria S.</p>
+                                <p class="w-95">Adorei o atendimento e o resultado final! Minhas unhas nunca estiveram tão bonitas!</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="../assets/img/clientes/cliente (2).png" class="rounded-circle mb-3" alt="Depoimento de cliente 2" style="width: 75px; height: 75px;">
+                                <p class="w-75">Felipa R.</p>
+                                <p class="w-95">Serviço de alta qualidade e profissionais muito competentes. Recomendo!</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="../assets/img/clientes/cliente (3).png" class="rounded-circle mb-3" alt="Depoimento de cliente 3" style="width: 75px; height: 75px;">
+                                <p class="w-75">Ana P.</p>
+                                <p class="w-95">Extensão de cílios perfeita! O ambiente é super acolhedor e confortável.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="../assets/img/clientes/cliente (4).png" class="rounded-circle mb-3" alt="Depoimento de cliente 4" style="width: 75px; height: 75px;">
+                                <p class="w-75">Joana M.</p>
+                                <p class="w-95">Fiz um design de sobrancelhas e amei o resultado! Voltarei com certeza.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#depoimentosCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+                    <a class="carousel-control-next" href="#depoimentosCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Próximo</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Seção de Serviços -->
         <div class="row mt-5" id="servicos">
@@ -111,40 +222,7 @@
             </div>
         </div>
 
-        <!-- Seção de Depoimentos -->
-        <div class="row mt-5" id="depoimentos">
-            <div class="col-md-12 text-center">
-                <h2>Depoimentos de Clientes Satisfeitos</h2>
-                <div class="carousel slide" data-ride="carousel" id="depoimentosCarousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../assets/img/clientes/cliente (1).png" class="d-block w-100" alt="Depoimento de cliente 1" style="width: 75px; height: 75px; border-radius: 50%;">
-                            <p>"Adorei o atendimento e o resultado final! Minhas unhas nunca estiveram tão bonitas!" - Maria S.</p>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../assets/img/clientes/cliente (2).png" class="d-block w-100" alt="Depoimento de cliente 2" style="width: 75px; height: 75px; border-radius: 50%;">
-                            <p>"Serviço de alta qualidade e profissionais muito competentes. Recomendo!" - Felipa R.</p>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../assets/img/clientes/cliente (3).png" class="d-block w-100" alt="Depoimento de cliente 3" style="width: 75px; height: 75px; border-radius: 50%;">
-                            <p>"Extensão de cílios perfeita! O ambiente é super acolhedor e confortável." - Ana P.</p>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../assets/img/clientes/cliente (4).png" class="d-block w-100" alt="Depoimento de cliente 4" style="width: 75px; height: 75px; border-radius: 50%;">
-                            <p>"Fiz um design de sobrancelhas e amei o resultado! Voltarei com certeza." - Joana M.</p>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#depoimentosCarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Anterior</span>
-                    </a>
-                    <a class="carousel-control-next" href="#depoimentosCarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Próximo</span>
-                    </a>
-                </div>
-            </div>
-        </div>
+
 
     <!-- Modal transparecen 95 -->
     <div class="modal fade" id="modalAgendamento" tabindex="-1" role="dialog" aria-labelledby="modalAgendamentoLabel" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.50);">
@@ -168,7 +246,7 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group">
+                        <div id="categoria_div" class="form-group">
                             <label for="categoria">Categoria</label>
                             <select class="form-control" id="categoria">
                                 <!-- Opções de categoria aqui -->
@@ -181,11 +259,11 @@
                             </select>
                         </div>
                         <div id="nome_div" class="form-group" style="display: none;">
-                            <label for="nome">Nome</label>
+                            <label for="name">Nome</label>
                             <input type="text" class="form-control" id="name" placeholder="Seu nome">
                         </div>
                         <div id="telefone_div" class="form-group" style="display: none;">
-                            <label for="telefone">Telefone</label>
+                            <label for="phone">Telefone</label>
                             <input type="tel" class="form-control" id="phone" placeholder="Seu telefone">
                         </div>
                     </form>

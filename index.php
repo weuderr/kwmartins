@@ -18,18 +18,37 @@ function loadPageContent($uri) {
         '/faq' => 'faq.php',
         '/politica-de-privacidade' => 'politica-de-privacidade.php',
         '/termos-de-uso' => 'termos-de-uso.php',
-        '/parceria' => 'parcerias.php'
+        '/parceria' => 'parcerias.php',
     ];
 
     $page = $pages[$uri] ?? 'home.php';
-    include('pages/sections/' . $page);
+
+    return 'pages/sections/' . $page;
+}
+
+
+function captureOutput($filePath) {
+    ob_start();
+    include($filePath);
+    return ob_get_clean();
 }
 
 include('pages/colect-info.php');
+
+$pageTitle = $pageTitle ?? 'Matosinhos - ';
+
+$pageContentFile = loadPageContent($requestedUri);
+
+$firebarContent = captureOutput('pages/firebar.php');
+$pageContent = captureOutput($pageContentFile);
+
+$headContent = captureOutput('pages/head.php');
+$navigatorContent = captureOutput('pages/navigator.php');
+$footerContent = captureOutput('pages/footer.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt">
-<?php include('pages/head.php'); ?>
+<?php echo $headContent; ?>
 <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MV8PF47M"
@@ -37,8 +56,8 @@ include('pages/colect-info.php');
     <!-- End Google Tag Manager (noscript) -->
 
     <div id="main-content" style="display: none;">
-        <?php include('pages/firebar.php'); ?>
-        <?php include('pages/navigator.php'); ?>
+        <?php echo $firebarContent; ?>
+        <?php echo $navigatorContent; ?>
 
         <div class="carousel slide header" data-ride="carousel">
             <div class="carousel-inner">
@@ -72,11 +91,11 @@ include('pages/colect-info.php');
         <div class="container">
             <h1 class="visually-hidden">KW Martins - Salão de Beleza, Estética, Manicure e Sobrancelhas</h1>
             <div class="conteudo mt-5">
-                <?php loadPageContent($requestedUri); ?>
+                <?php echo $pageContent; ?>
             </div>
         </div>
 
-        <?php include('pages/footer.php'); ?>
+        <?php echo $footerContent; ?>
 
         <div id="gdpr-consent-container" class="gdpr-consent-container">
             <div class="gdpr-consent-content p-2">
@@ -98,5 +117,11 @@ include('pages/colect-info.php');
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/assets/js/default.js"></script>
     <script src="/assets/js/update-infos.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#loading-icon").hide();
+            $("#main-content").fadeIn();
+        });
+    </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<div id="appointmentModal" class="modal fade appointment-modal" role="dialog">
+<div id="appointmentModal" class="modal fade appointment-modal" role="dialog" style="z-index: 9999;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -22,8 +22,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" onclick="sendAppointment()">Encaminhar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" onclick="sendAppointment()">Encaminhar</button>
             </div>
         </div>
     </div>

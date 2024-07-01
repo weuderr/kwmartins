@@ -10,7 +10,7 @@
         define('BASE_PATH', realpath(dirname(__FILE__)));
         require BASE_PATH . '/pages/db_connect.php';
 
-        $categoriesRaw = $database->query("SELECT * FROM categories ORDER BY name");
+        $categoriesRaw = $database->query("SELECT * FROM categories WHERE deleted_at IS NULL ORDER BY name");
         $categories = $categoriesRaw->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($categories as $key => $category) {
@@ -31,7 +31,7 @@
              define('BASE_PATH', realpath(dirname(__FILE__)));
              require BASE_PATH . '/pages/db_connect.php';
 
-             $categorias = $database->prepare("SELECT * FROM categories WHERE name = :categoria");
+             $categorias = $database->prepare("SELECT * FROM categories WHERE name = :categoria AND deleted_at IS NULL");
              $categorias->execute([':categoria' => $categoria]);
              $categorias = $categorias->fetch(PDO::FETCH_ASSOC);
 

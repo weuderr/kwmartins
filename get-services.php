@@ -10,7 +10,7 @@
         define('BASE_PATH', realpath(dirname(__FILE__)));
         require BASE_PATH . '/pages/db_connect.php';
 
-        $services = $database->query("SELECT * FROM services WHERE is_active = 1 ORDER BY category_id, name");
+        $services = $database->query("SELECT * FROM services WHERE is_active = 1 AND deleted_at IS NULL ORDER BY category_id, name");
         $services = $services->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($services as $key => $service) {

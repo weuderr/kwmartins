@@ -14,3 +14,7 @@
             </div> <!-- Container para os cards de serviços -->
         </div>
     </div>
+
+    <!-- Modal de agendamento -->
+    <?php include('modalAppointment.php'); ?>
+

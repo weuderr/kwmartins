@@ -88,7 +88,7 @@ a:hover {
 }
 @font-face {
     font-family: 'Gabriola';
-    src: url('https://fonts.cdnfonts.com/s/12303/Gabriola.woff') format('woff');
+    src: url('https://kwmartins.pt/assets/font/Gabriola.woff') format('woff');
 }
 /*------*/
 
@@ -396,13 +396,14 @@ a {
 
 /* Estilização do menu de artigos */
 #menu {
-    width: 240px; /* Largura fixa para o menu */
+    min-width: 240px; /* Largura fixa para o menu */
     background: #f4f4f4; /* Cor de fundo para o menu */
     padding: 20px;
     box-sizing: border-box; /* Garante que o padding não adicione largura ao elemento */
     height: 100vh; /* Altura total da janela de visualização */
     overflow-y: auto; /* Adiciona rolagem se o conteúdo for muito longo */
 }
+#map { height: 550px; width: 100%; }
 
 /* Home */
 
@@ -603,32 +604,46 @@ a {
 }
 
 #depoimentos {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: #f8f9fa; /* Fundo claro */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: block;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
-    padding: 20px 0 0 0;
+    padding: 20px;
     border-radius: 15px;
-    margin: 0;
+    margin: 0 auto; /* Centraliza o elemento */
+    width: 350px; /* Define a largura */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#depoimentos h2 {
+    color: #d63384; /* Cor do título */
+    margin-bottom: 20px;
 }
 
 #depoimentos p {
-    font-size: 24px;
-    color: #ffffff;
+    font-size: 18px;
+    color: #333333; /* Cor do texto */
     text-align: center;
     margin-top: 10px;
-    margin-left: 60px;
-    margin-right: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+    max-width: 700px;
 }
 
 #depoimentos img {
-    width: 75px !important;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
     margin: 0 auto;
     display: block;
 }
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    color: #a6a6a6;
+}
+
+
 
 .whatsapp-button {
     position: fixed;

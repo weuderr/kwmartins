@@ -1,9 +1,11 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="KW Martins - Sua Beleza, Nossa Paixão" />
-    <meta property="og:description" content="Descubra como a KW Martins pode transformar sua beleza e autoestima com nossos serviços especializados." />
+    <meta name="description" content="KW Martins oferece uma ampla gama de serviços de beleza e estética, incluindo design de sobrancelhas, micropigmentação, manicure, pedicure, unhas de gel, alongamento de cílios e tratamentos faciais. Cuide da sua beleza e bem-estar em nosso salão de beleza especializado em cuidados pessoais e estéticos." />
+    <meta name="keywords" content="KW Martins, KW, Martins, beleza, estética, tratamentos, sobrancelhas, design de sobrancelhas, micropigmentação, unhas, manicure, pedicure, unhas de gel, estética de sobrancelhas, cuidados com as unhas, nails, cuidado pessoal, tratamentos faciais, salão de beleza, salao feminino, alongamento de cílios">
+
     <meta property="og:url" content="https://www.kwmartins.pt" />
     <meta property="og:image" itemprop="image" content="https://kwmartins.pt/assets/img/icon-logo.png" />
     <meta property="og:type" content="website" />
@@ -17,8 +19,6 @@
     <meta name="twitter:title" content="KW Martins - Sua Beleza, Nossa Paixão">
     <meta name="twitter:description" content="Descubra como a KW Martins pode transformar sua beleza e autoestima com nossos serviços especializados.">
     <meta name="twitter:image" content="https://kwmartins.pt/assets/img/icon-logo.png">
-    <meta name="description" content="Descubra como a KW Martins pode transformar sua beleza e autoestima com nossos serviços especializados.">
-    <meta name="keywords" content="KW Martins, beleza, estética, tratamentos, depilação, massagens, bem-estar, sobrancelhas, design de sobrancelhas, micropigmentação, unhas, manicure, pedicure, unhas de gel, estética de sobrancelhas, cuidados com as unhas, autoestima, mulheres, qualidade, inovação, confiança, spa, nails, tecnologia avançada, relaxamento, produtos premium, serviços personalizados, ambiente acolhedor, resultados excepcionais, empoderamento feminino, modernidade, satisfação do cliente, transformação, cuidado pessoal, estilo de vida saudável, tratamentos faciais, salão de beleza, salão, cabeleireiro, corte de cabelo, studio, salao feminino, salões de beleza proximos a mim, alongamento de cílios">
     <meta name="author" content="KW Martins">
     <meta name="robots" content="index, follow">
     <meta name="revisit-after" content="7 days">
@@ -32,17 +32,34 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="KW Martins">
-    <link rel="icon" href="/assets/img/logo.jpg" type="image/png">
 
+    <meta property="og:title" content="KW Martins - Estética Avançada (Matosinhos)">
+    <meta property="og:description" content="Em KW Martins - Estética Avançada (Matosinhos), entendemos suas necessidades. Confira nossa oferta única e descubra por que nossos clientes confiam em nós. Confira!">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/cdn-cgi/image/compression=fast,height=16,width=16/https://lh3.googleusercontent.com/a/ACg8ocLBDz6Wl8FSDMWBrCw-6fc93AfKE-0qFtHDOrLde4ptLb3QLSs">
+    <link rel="icon" type="image/png" sizes="32x32" href="/cdn-cgi/image/compression=fast,height=32,width=32/https://lh3.googleusercontent.com/a/ACg8ocLBDz6Wl8FSDMWBrCw-6fc93AfKE-0qFtHDOrLde4ptLb3QLSs">
+    <link rel="icon" type="image/png" sizes="48x48" href="/cdn-cgi/image/compression=fast,height=48,width=48/https://lh3.googleusercontent.com/a/ACg8ocLBDz6Wl8FSDMWBrCw-6fc93AfKE-0qFtHDOrLde4ptLb3QLSs">
+    <link rel="icon" type="image/png" sizes="64x64" href="/cdn-cgi/image/compression=fast,height=64,width=64/https://lh3.googleusercontent.com/a/ACg8ocLBDz6Wl8FSDMWBrCw-6fc93AfKE-0qFtHDOrLde4ptLb3QLSs">
+    <link rel="icon" type="image/png" sizes="192x192" href="/cdn-cgi/image/compression=fast,height=192,width=192/https://lh3.googleusercontent.com/a/ACg8ocLBDz6Wl8FSDMWBrCw-6fc93AfKE-0qFtHDOrLde4ptLb3QLSs">
+
+    <link rel="apple-touch-icon" href="/cdn-cgi/image/compression=fast,height=120,width=120/https://lh3.googleusercontent.com/a/ACg8ocLBDz6Wl8FSDMWBrCw-6fc93AfKE-0qFtHDOrLde4ptLb3QLSs">
+    <link rel="apple-touch-icon" sizes="152x152" href="/cdn-cgi/image/compression=fast,height=152,width=152/https://lh3.googleusercontent.com/a/ACg8ocLBDz6Wl8FSDMWBrCw-6fc93AfKE-0qFtHDOrLde4ptLb3QLSs">
+    <link rel="apple-touch-icon" sizes="167x167" href="/cdn-cgi/image/compression=fast,height=167,width=167/https://lh3.googleusercontent.com/a/ACg8ocLBDz6Wl8FSDMWBrCw-6fc93AfKE-0qFtHDOrLde4ptLb3QLSs">
+    <link rel="apple-touch-icon" sizes="180x180" href="/cdn-cgi/image/compression=fast,height=180,width=180/https://lh3.googleusercontent.com/a/ACg8ocLBDz6Wl8FSDMWBrCw-6fc93AfKE-0qFtHDOrLde4ptLb3QLSs">
+
+    <link rel="icon" href="/assets/img/icon-logo.ico" type="image/x-icon">
+    <link rel="canonical" href="https://kwmartins.pt/">
     <link rel="apple-touch-icon" sizes="180x180" href="https://kwmartins.pt/assets/img/icon-logo-50x50.png">
-    <title><?php echo isset($pageTitle) ? $pageTitle : 'KW Martins'; ?></title>
+    <title><?php echo isset($pageTitle) ? $pageTitle : ''; ?>KW Martins - Salão de Beleza, Estética, Manicure e Sobrancelhas</title>
+
 <!--    <title>KW Martins - Sua Beleza, Nossa Paixão</title>-->
-    <link rel="icon" href="https://kwmartins.pt/assets/img/icon-logo-50x50.png" type="image/png">
     <link rel="stylesheet" href="https://kwmartins.pt/assets/css/reset.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://kwmartins.pt/assets/css/default.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <!-- Meta Pixel Code -->
     <script>
         !function(f,b,e,v,n,t,s)
@@ -71,11 +88,13 @@
     <!-- End clarity Code -->
 
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MV8PF47M');</script>
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MV8PF47M');
+    </script>
     <!-- End Google Tag Manager -->
     <script>
     !function (w, d, t) {

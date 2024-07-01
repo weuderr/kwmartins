@@ -1,3 +1,7 @@
+<?php
+    $pageTitle = "FAQ - ";
+?>
+
 <h5 class="mb-4">FAQ - Perguntas Frequentes</h5>
 <div class="faq">
     <p class="faq-question">Que serviços oferecem?</p>

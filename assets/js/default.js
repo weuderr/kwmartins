@@ -68,30 +68,31 @@ $(document).ready(function() {
         if(!id && !name) {
             id = selectCategoria.val();
             name = selectCategoria.find('option:selected').text();
+        } else {
+            $('#appointmentModal').modal('show');
         }
         $('[name="message"]').val(name);
         $('#modalAppointmentName').text(name);
-        // $('#appointmentModal').modal('show');
         const service = allServicos.filter(servico => servico.id == id);
         selectedService = service[0];
 
         fbq('track', 'ViewContent');
-        gtag('event', 'interest', {
-            'event_category': 'appointment',
-            'event_label': 'open',
-            'value': selectedService?.price,
-        });
-        ttq.track('ViewContent', {
-            "contents": [
-                {
-                    "content_id": selectedService?.id, // string. ID of the product. Example: "1077218".
-                    "content_type": "Appointment", // string. Either product or product_group.
-                    "content_name": selectedService?.name, // string. The name of the page or product. Example: "shirt".
-                }
-            ],
-            "value": selectedService?.price, // number. Value of the order or items sold. Example: 100.
-            "currency": "EUR" // string. The 4217 currency code. Example: "USD".
-        });
+        // gtag('event', 'interest', {
+        //     'event_category': 'appointment',
+        //     'event_label': 'open',
+        //     'value': selectedService?.price,
+        // });
+        // ttq.track('ViewContent', {
+        //     "contents": [
+        //         {
+        //             "content_id": selectedService?.id, // string. ID of the product. Example: "1077218".
+        //             "content_type": "Appointment", // string. Either product or product_group.
+        //             "content_name": selectedService?.name, // string. The name of the page or product. Example: "shirt".
+        //         }
+        //     ],
+        //     "value": selectedService?.price, // number. Value of the order or items sold. Example: 100.
+        //     "currency": "EUR" // string. The 4217 currency code. Example: "USD".
+        // });
     }
 
     function sendAppointment() {
@@ -112,7 +113,7 @@ $(document).ready(function() {
         const professionalPhone = $('[name="professional-phone"]').val();
 
         if (name || phone ) {
-            const fullText = `Procedimento: ${this.msgAgendamento}`;
+            const fullText = `Agendamento realizado pelo site. Nome: ${name}, Telefone: ${phone}`;
             const dataSend = {
                 name: name,
                 phone: phone,
@@ -128,16 +129,22 @@ $(document).ready(function() {
                 data: dataSend,
                 success: function(response) {
                     console.log(response);
+                    if (response.status === 'success') {
+                        console.log('Agendamento realizado com sucesso!');
+                        alert('Agendamento realizado com sucesso! Aguarde o contato do profissional.');
+                        // $('#appointmentModal').modal('hide');
+                        $('#modalAgendamento').modal('hide');
+                    }
                 }
             });
 
             fbq('track', 'Lead');
             <!-- Event snippet for Visualização de página conversion page -->
-            gtag('event', 'conversion', {
-                'send_to': 'AW-16557132820/UO70CNKcxq0ZEJSYh9c9',
-                'value': selectedService?.price,
-                'currency': 'EUR'
-            });
+            // gtag('event', 'conversion', {
+            //     'send_to': 'AW-16557132820/UO70CNKcxq0ZEJSYh9c9',
+            //     'value': selectedService?.price,
+            //     'currency': 'EUR'
+            // });
 
             ttq.track('Contact', {
                 "contents": [
@@ -151,11 +158,6 @@ $(document).ready(function() {
                 "value": selectedService?.price, // number. Value of the order or items sold. Example: 100.
                 "currency": "EUR" // string. The 4217 currency code. Example: "USD".
             });
-
-            // $('#appointmentModal').modal('hide');
-            $('#modalAgendamento').modal('hide');
-
-            alert('Pre-agendamento realizado com sucesso! Aguarde o contato do profissional.');
         } else {
             alert('Preencha todos os campos!');
         }
@@ -168,14 +170,14 @@ $(document).ready(function() {
         const type = allCategories.filter(category => category.id == servico.category_id);
         return `
                 <div class="col-md-4">
-                    <div class="card shadow-sm card-custom">
+                    <div class="card shadow-sm card-custom service-appointment" onclick="openAppointment('${servico.id}', '${servico.name}')">
                         <div class="card-header">${servico.name}</div>
                         <div class="card-body">
                             <h5 class="card-title">${type[0].name}</h5>
                             <p class="card-text">${servico.description}</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <button class="btn btn-principal float-right" onclick="openAppointment('${servico.id}', '${servico.name}')">Agendar</button>
+                            <button class="btn btn-principal float-right" >Agendar</button>
                         </div>
                     </div>
                 </div>
@@ -186,7 +188,6 @@ $(document).ready(function() {
         selecionarSection();
         generateMetaDescription();
     }
-
 
     function selecionarSection() {
         const section = window.location.pathname.split('/').pop().split('.').shift();
@@ -264,10 +265,6 @@ $(document).ready(function() {
 
 
     let selectCategoria = $('#categoria');
-    selectCategoria.html('');
-
-    let opcao = $('<option></option>').attr('value', '').text('Selecione uma categoria');
-    selectCategoria.append(opcao);
 
     let selectServico = $('#servico');
     selectServico.html('');
@@ -275,9 +272,14 @@ $(document).ready(function() {
     selectServico.append(opcao2);
 
     let categorias = ['Alongamento de unhas', 'Estético', 'Manicure', 'Pedicure', 'Pestanas', 'Sobrancelhas'];
-    for (let i = 0; i < categorias.length; i++) {
-        let opcao = $('<option></option>').attr('value', categorias[i]).text(categorias[i]);
-        selectCategoria.append(opcao);
+    fillCategorias();
+    function fillCategorias() {
+        selectCategoria.html('');
+        selectCategoria.append($('<option></option>').attr('value', '').text('Selecione uma categoria'));
+        for (let i = 0; i < categorias.length; i++) {
+            let opcao = $('<option></option>').attr('value', categorias[i]).text(categorias[i]);
+            selectCategoria.append(opcao);
+        }
     }
 
     function showPromoModal() {
@@ -328,6 +330,7 @@ $(document).ready(function() {
     });
 
     $('#modalAgendamento').on('show.bs.modal', function() {
+        fillCategorias();
         selectCategoria.prop('selectedIndex', 0);
         selectServico.html('');
         selectServico.prop('selectedIndex', 0);
